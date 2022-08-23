@@ -2,7 +2,16 @@
 
 Browser extension to inject the LocalStorage of a website. Build with [Plasmo](https://docs.plasmo.com/).
 
-## Installation
+![image](https://user-images.githubusercontent.com/17295145/186226169-923bda5d-9a7e-4ed8-8768-a031d0225a2f.png)
+
+## Instalation
+
+1. Download the latest [toggle-exeperments-extension.zip](https://github.com/aaron5670/toggle-experiments-extension/releases) here.
+2. Go in your (Chrome) browser to **chrome://extensions/** and click on **Load unpacked**.
+3. Upload the toggle-exeperments-extension.zip you downloaded before.
+4. Enjoy! 🙂
+
+## Development
 
 First, run the development server:
 
