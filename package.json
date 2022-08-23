@@ -1,0 +1,45 @@
+{
+  "name": "toggle-optimizely",
+  "displayName": "Toggle Optimizely",
+  "description": "A browser extension to inject the LocalStorage of a website for Optimizely experiments.",
+  "version": "1.0.0",
+  "author": "Aaron van den Berg",
+  "homepage": "https://aaronvandenberg.nl/",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@mantine/core": "^5.1.6",
+    "@mantine/hooks": "^5.1.6",
+    "@plasmohq/storage": "^0.8.1",
+    "@tabler/icons": "^1.83.1",
+    "immer": "^9.0.15",
+    "plasmo": "0.52.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zustand": "^4.0.0"
+  },
+  "devDependencies": {
+    "@plasmohq/prettier-plugin-sort-imports": "1.2.0",
+    "@types/chrome": "0.0.193",
+    "@types/node": "18.6.4",
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "prettier": "2.7.1",
+    "typescript": "4.7.4"
+  },
+  "manifest": {
+    "host_permissions": [
+      "http://*/*",
+      "https://*/*"
+    ],
+    "permissions": [
+      "scripting"
+    ]
+  },
+  "volta": {
+    "node": "16.17.0"
+  }
+}
