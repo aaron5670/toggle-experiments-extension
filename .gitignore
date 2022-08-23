@@ -32,6 +32,8 @@ out/
 build/
 dist/
 
+.idea/
+
 # plasmo - https://www.plasmo.com
 .plasmo
 
