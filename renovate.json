@@ -1,0 +1,25 @@
+{
+  "extends": ["config:base"],
+  "labels": ["dependencies"],
+  "baseBranches": ["main"],
+  "timezone": "Europe/Amsterdam",
+  "schedule": [
+    "after 8am every weekday",
+    "before 8pm every weekday"
+  ],
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies", "dependencies"],
+      "matchUpdateTypes": ["patch"],
+      "groupName": "(Dev) Dependencies (patch)"
+    },
+    {
+      "matchPackageNames": ["^@react"],
+      "groupName": ["React"]
+    },
+    {
+      "matchPackageNames": ["^@mantine"],
+      "groupName": ["Mantine"]
+    }
+  ]
+}
