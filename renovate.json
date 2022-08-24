@@ -3,6 +3,7 @@
   "extends": ["config:base", ":dependencyDashboardApproval"],
   "labels": ["dependencies"],
   "baseBranches": ["main"],
+  "requiredStatusChecks": null,
   "timezone": "Europe/Amsterdam",
   "schedule": [
     "after 8am every weekday",
@@ -12,7 +13,8 @@
     {
       "matchDepTypes": ["devDependencies", "dependencies"],
       "matchUpdateTypes": ["patch"],
-      "groupName": "(Dev) Dependencies (patch)"
+      "groupName": "(Dev) Dependencies (patch)",
+      "automerge": true
     },
     {
       "matchPackageNames": ["^@react"],
