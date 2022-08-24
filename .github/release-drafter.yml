@@ -15,6 +15,8 @@ categories:
     label: 'documentation'
   - title: '🐛 Bug Fixes'
     label: 'bug'
+  - title: '📦 Dependency Updates'
+    label: 'depenencies'
 
 version-resolver:
   major:
@@ -31,6 +33,7 @@ version-resolver:
       - 'docs'
       - 'dependencies'
       - 'improvement'
+      - 'depenencies'
 
 exclude-labels:
   - 'skip-changelog'
