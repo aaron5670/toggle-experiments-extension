@@ -2,7 +2,7 @@
 
 Browser extension to inject the LocalStorage of a website. Build with [Plasmo](https://docs.plasmo.com/).
 
-![image](https://user-images.githubusercontent.com/17295145/186227477-9934a3ac-d994-4f41-91f7-bf527ca4e94c.png)
+![image](https://user-images.githubusercontent.com/17295145/186449819-87981a46-d822-4c68-8651-001ccadc3af7.png)
 
 ## Installation
 

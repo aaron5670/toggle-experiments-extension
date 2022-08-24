@@ -1,20 +1,10 @@
-import { Card } from "@mantine/core";
+import { ActionIcon, Card, Grid } from "@mantine/core";
+import { IconTrash } from "@tabler/icons";
+import { removeLocalStorageValue, updateLocalStorageValue } from "~handlers/localStorageHandlers";
 import useStore from "~store/useStore";
 import SaveButton from "~components/SaveButton";
 import FloatingLabelInput from "~components/FloatingLabelInput";
-import localStorageInjector from "~local-storage-injector";
 import Header from "~components/Header";
-
-const inject = async (tabId, localStorageKey, localStorageValue) => {
-  await chrome.scripting.executeScript(
-    {
-      target: { tabId },
-      world: "MAIN", // MAIN in order to access the window object
-      func: localStorageInjector,
-      args: [localStorageKey, localStorageValue]
-    }
-  );
-};
 
 function IndexPopup() {
   const { localStorageKey, localStorageValue, setLocalStorageValue } = useStore(state => state);
@@ -22,7 +12,15 @@ function IndexPopup() {
   const saveToLocalStorage = (e) => {
     e.preventDefault();
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      inject(tabs[0].id, localStorageKey, localStorageValue);
+      updateLocalStorageValue(tabs[0].id, localStorageKey, localStorageValue);
+    });
+  };
+
+  const removeLocalStorage = (e) => {
+    e.preventDefault();
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      setLocalStorageValue("");
+      removeLocalStorageValue(tabs[0].id, localStorageKey);
     });
   };
 
@@ -33,11 +31,20 @@ function IndexPopup() {
         description={`Current LocalStorage key: ${localStorageKey}`}
       />
       <form onSubmit={saveToLocalStorage}>
-        <FloatingLabelInput
-          label="Optimizely username"
-          value={localStorageValue}
-          onChange={setLocalStorageValue}
-        />
+        <Grid>
+          <Grid.Col span={10}>
+            <FloatingLabelInput
+              label="Optimizely username"
+              value={localStorageValue}
+              onChange={setLocalStorageValue}
+            />
+          </Grid.Col>
+          <Grid.Col span={2}>
+            <ActionIcon variant="light" onClick={removeLocalStorage} style={{marginTop: 19}}>
+              <IconTrash size={20} color="red" />
+            </ActionIcon>
+          </Grid.Col>
+        </Grid>
         <SaveButton text="Save to LocalStorage" />
       </form>
     </Card>
