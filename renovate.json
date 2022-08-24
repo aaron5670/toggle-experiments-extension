@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", ":dependencyDashboardApproval"],
   "labels": ["dependencies"],
   "baseBranches": ["main"],
   "timezone": "Europe/Amsterdam",
