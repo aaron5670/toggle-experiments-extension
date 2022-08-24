@@ -16,7 +16,7 @@ categories:
   - title: '🐛 Bug Fixes'
     label: 'bug'
   - title: '📦 Dependency Updates'
-    label: 'depenencies'
+    label: 'dependencies'
 
 version-resolver:
   major:
