@@ -2,7 +2,7 @@
   "name": "toggle-optimizely",
   "displayName": "Toggle Optimizely",
   "description": "A browser extension to inject the LocalStorage of a website for Optimizely experiments.",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "author": "Aaron van den Berg",
   "homepage": "https://aaronvandenberg.nl/",
   "scripts": {
@@ -10,26 +10,25 @@
     "build": "plasmo build"
   },
   "dependencies": {
-    "@emotion/react": "11.10.0",
-    "@mantine/core": "5.2.3",
-    "@mantine/hooks": "5.2.3",
-    "@plasmohq/storage": "0.8.1",
-    "@tabler/icons": "1.86.0",
-    "immer": "9.0.15",
-    "plasmo": "0.52.1",
+    "@emotion/react": "^11.10.4",
+    "@mantine/core": "^5.5.5",
+    "@mantine/hooks": "^5.5.5",
+    "@plasmohq/storage": "^0.12.2",
+    "@tabler/icons": "^1.104.0",
+    "immer": "^9.0.15",
+    "plasmo": "0.56.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "zustand": "4.1.1"
+    "zustand": "^4.1.2"
   },
   "devDependencies": {
-    "@babel/core": "7.18.13",
-    "@plasmohq/prettier-plugin-sort-imports": "1.2.0",
-    "@types/chrome": "0.0.195",
-    "@types/node": "18.6.4",
-    "@types/react": "18.0.17",
+    "@plasmohq/prettier-plugin-sort-imports": "3.5.4",
+    "@types/chrome": "0.0.197",
+    "@types/node": "18.8.5",
+    "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "prettier": "2.7.1",
-    "typescript": "4.7.4"
+    "typescript": "4.8.4"
   },
   "manifest": {
     "host_permissions": [
