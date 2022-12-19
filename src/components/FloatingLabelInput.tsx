@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextInput, createStyles } from '@mantine/core';
+import { TextInput, createStyles, Loader } from "@mantine/core";
 
 const useStyles = createStyles((theme, { floating }: { floating: boolean }) => ({
   root: {
@@ -38,7 +38,7 @@ const useStyles = createStyles((theme, { floating }: { floating: boolean }) => (
   },
 }));
 
-const FloatingLabelInput = ({label, description= '', value, onChange}) => {
+const FloatingLabelInput = ({label, description= '', value, onChange, loading = false}) => {
   const [focused, setFocused] = useState(false);
   const { classes } = useStyles({ floating: value.trim().length !== 0 || focused });
 
@@ -53,6 +53,7 @@ const FloatingLabelInput = ({label, description= '', value, onChange}) => {
       mt="md"
       radius="md"
       autoComplete="nope"
+      rightSection={loading && <Loader size="xs" />}
     />
   );
 }

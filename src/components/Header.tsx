@@ -1,5 +1,5 @@
-import { ActionIcon, Grid, Text } from "@mantine/core";
-import { IconAdjustments } from "@tabler/icons";
+import { ActionIcon, Group, Text } from "@mantine/core";
+import { IconAdjustments, IconSearch, IconX } from "@tabler/icons";
 import useStore from "~store/useStore";
 
 interface HeaderProps {
@@ -7,34 +7,40 @@ interface HeaderProps {
   description?: string;
 }
 
-const Header = ({title, description = ""}: HeaderProps) => {
-  const {screen, setScreen} = useStore(state => state);
-
-  const changeScreen = () => {
-    if (screen === 'settings') {
-      setScreen('home');
-    } else {
-      setScreen('settings');
-    }
-  }
+const Header = ({ title, description = "" }: HeaderProps) => {
+  const { screen, setScreen } = useStore(state => state);
 
   return (
-    <Grid>
-      <Grid.Col span={10}>
-        <Text size="lg" weight={500}>
+    <>
+      <Group position="apart">
+        <Text
+          variant="gradient"
+          gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+          sx={{ fontFamily: "Greycliff CF, sans-serif" }}
+          ta="center"
+          fz="xl"
+          fw={700}
+        >
           {title}
         </Text>
-        <Text size="xs" color="dimmed" mt={3} mb="xl">
-          {description}
-        </Text>
-      </Grid.Col>
-      <Grid.Col span={2}>
-        <ActionIcon onClick={changeScreen}>
-          <IconAdjustments />
-        </ActionIcon>
-      </Grid.Col>
-    </Grid>
-  )
-}
+        <Group position="right" spacing={1}>
+          <ActionIcon
+            onClick={() => setScreen(screen === "search" ? "home" : "search")}
+          >
+            {screen === "search" ? (<IconX />) : (<IconSearch />)}
+          </ActionIcon>
+          <ActionIcon
+            onClick={() => setScreen(screen === "settings" ? "home" : "settings")}
+          >
+            <IconAdjustments />
+          </ActionIcon>
+        </Group>
+      </Group>
+      <Text size="xs" color="dimmed" mt="md"  mb="xl">
+        {description}
+      </Text>
+    </>
+  );
+};
 
 export default Header;
