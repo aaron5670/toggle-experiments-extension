@@ -2,8 +2,8 @@ lockfileVersion: 5.4
 
 specifiers:
   '@emotion/react': ^11.10.4
-  '@mantine/core': ^5.5.5
-  '@mantine/hooks': ^5.5.5
+  '@mantine/core': ^5.9.5
+  '@mantine/hooks': ^5.9.5
   '@plasmohq/prettier-plugin-sort-imports': 3.5.4
   '@plasmohq/storage': ^0.12.2
   '@tabler/icons': ^1.104.0
@@ -21,8 +21,8 @@ specifiers:
 
 dependencies:
   '@emotion/react': 11.10.4_bjroym7kxlcs2vvwnej4p3gzwu
-  '@mantine/core': 5.5.5_ekj4xtn5nqtot2bmww23lp2qbq
-  '@mantine/hooks': 5.5.5_react@18.2.0
+  '@mantine/core': 5.9.5_sangcu27ug4wpw4wjq5m7ftas4
+  '@mantine/hooks': 5.9.5_react@18.2.0
   '@plasmohq/storage': 0.12.2_react@18.2.0
   '@tabler/icons': 1.104.0_biqbaboplfbrettd7655fr4n2y
   immer: 9.0.15
@@ -519,18 +519,18 @@ packages:
     dev: false
     optional: true
 
-  /@mantine/core/5.5.5_ekj4xtn5nqtot2bmww23lp2qbq:
-    resolution: {integrity: sha512-VjNpz5mvV1hg6RbVuLkA9uY+iS3Ocpg9C0ZjnBuMKbDA9TYmpxgLJ1Eo56OMfJvQ03W8qG/prIwY8QNZddtNBg==}
+  /@mantine/core/5.9.5_sangcu27ug4wpw4wjq5m7ftas4:
+    resolution: {integrity: sha512-A3cYzGOJ9BpU6tgqTl8qzOe8mmqzvuB76N6IHsPjk+uhbQCBXuNaoxOemP0wEM4HpEAzH1FR1kGhk6tO3gogUA==}
     peerDependencies:
-      '@mantine/hooks': 5.5.5
+      '@mantine/hooks': 5.9.5
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@floating-ui/react-dom-interactions': 0.10.1_rj7ozvcq3uehdlnj3cbwzbi5ce
-      '@mantine/hooks': 5.5.5_react@18.2.0
-      '@mantine/styles': 5.5.5_7xbt6cqxny5okm7nuwm4cfiesq
-      '@mantine/utils': 5.5.5_react@18.2.0
-      '@radix-ui/react-scroll-area': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@mantine/hooks': 5.9.5_react@18.2.0
+      '@mantine/styles': 5.9.5_7xbt6cqxny5okm7nuwm4cfiesq
+      '@mantine/utils': 5.9.5_react@18.2.0
+      '@radix-ui/react-scroll-area': 1.0.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-textarea-autosize: 8.3.4_iapumuv4e6jcjznwuxpf4tt22e
@@ -539,16 +539,16 @@ packages:
       - '@types/react'
     dev: false
 
-  /@mantine/hooks/5.5.5_react@18.2.0:
-    resolution: {integrity: sha512-qWZAZm203s0knYk6Ut4VPvur9H5BMul02cCb9E09s60iSjnLRHDC3f73VmSzmLZNVfgE+7hXUhguR/1lC7js4Q==}
+  /@mantine/hooks/5.9.5_react@18.2.0:
+    resolution: {integrity: sha512-6u0oj5zFYAP8bY+iW5Y5HEFS6tZmvJN5KwNPH+F2Omw61hN7shehHED7Jbe5zkxcggFvqmkA/6FMk+VYfovmkA==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
       react: 18.2.0
     dev: false
 
-  /@mantine/styles/5.5.5_7xbt6cqxny5okm7nuwm4cfiesq:
-    resolution: {integrity: sha512-cAYLoqQbnyoJepD7zstFF+A2/rj8DJblBzEdri0V+CWQccpqfP5xOTPEvCHVwQUODg40uT9PyVwFZ4h+zyyzvg==}
+  /@mantine/styles/5.9.5_7xbt6cqxny5okm7nuwm4cfiesq:
+    resolution: {integrity: sha512-Rixu60eVS9aP8ugTM0Yoc5MpXXsfemRlu2PDZGL0fhcOyUYHi5mXvlhgxqrET3zkFrBJ+PHuPLQBgBimffGqiw==}
     peerDependencies:
       '@emotion/react': '>=11.9.0'
       react: '>=16.8.0'
@@ -561,8 +561,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@mantine/utils/5.5.5_react@18.2.0:
-    resolution: {integrity: sha512-nt8+A0N1cV4cJNqlKuXazShoEwqtLohHNKFuywEdF3B6vHWdbY799PbT2WmqGTwNQ+se8y5/nBMmamBZrUN4fg==}
+  /@mantine/utils/5.9.5_react@18.2.0:
+    resolution: {integrity: sha512-OtMOvXMyqpZ+Tz25DYRwRkvERvmF4L0RJiq+JnXk+1yKDvG+JZQuMMLnt0nZ81T6q7uzDSA29cJ45syHL2BXmQ==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
@@ -1835,20 +1835,20 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@radix-ui/react-primitive/1.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-EyXe6mnRlHZ8b6f4ilTDrXmkLShICIuOTTj0GX4w1rp+wSxf3+TD05u1UOITC8VsJ2a9nwHvdXtOXEOl0Cw/zQ==}
+  /@radix-ui/react-primitive/1.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-fHbmislWVkZaIdeF6GZxF0A/NH/3BjrGIYj+Ae6eTmTCr7EB0RQAAVEiqsXK6p3/JcRqVSBQoceZroj30Jj3XA==}
     peerDependencies:
       react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     dependencies:
       '@babel/runtime': 7.19.4
-      '@radix-ui/react-slot': 1.0.0_react@18.2.0
+      '@radix-ui/react-slot': 1.0.1_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@radix-ui/react-scroll-area/1.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-3SNFukAjS5remgtpAVR9m3Zgo23ZojBZ8V3TCyR3A+56x2mtVqKlPV4+e8rScZUFMuvtbjIdQCmsJBFBazKZig==}
+  /@radix-ui/react-scroll-area/1.0.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-k8VseTxI26kcKJaX0HPwkvlNBPTs56JRdYzcZ/vzrNUkDlvXBy8sMc7WvCpYzZkHgb+hd72VW9MqkqecGtuNgg==}
     peerDependencies:
       react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
@@ -1860,15 +1860,15 @@ packages:
       '@radix-ui/react-context': 1.0.0_react@18.2.0
       '@radix-ui/react-direction': 1.0.0_react@18.2.0
       '@radix-ui/react-presence': 1.0.0_biqbaboplfbrettd7655fr4n2y
-      '@radix-ui/react-primitive': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-use-callback-ref': 1.0.0_react@18.2.0
       '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@radix-ui/react-slot/1.0.0_react@18.2.0:
-    resolution: {integrity: sha512-3mrKauI/tWXo1Ll+gN5dHcxDPdm/Df1ufcDLCecn+pnCIVcdWE7CujXo8QaXOWRJyZyQWWbpB8eFwHzWXlv5mQ==}
+  /@radix-ui/react-slot/1.0.1_react@18.2.0:
+    resolution: {integrity: sha512-avutXAFL1ehGvAXtPquu0YK5oz6ctS474iM3vNGQIkswrVhdrS52e3uoMQBzZhNRAIE0jBnUyXWNmSjGHhCFcw==}
     peerDependencies:
       react: ^16.8 || ^17.0 || ^18.0
     dependencies:
