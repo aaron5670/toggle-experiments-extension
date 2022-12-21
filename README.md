@@ -1,15 +1,26 @@
-# Toggle Experiments Browser Extension for Optimizely
+# Toggle Optimizely Experiments - Chrome Extension
 
-Browser extension to inject the LocalStorage of a website. Build with [Plasmo](https://docs.plasmo.com/).
+With this extension you can toggle Optimizely experiments on and off.
+Also, you can inject custom values into the LocalStorage of the current page.
+Build with [Plasmo](https://docs.plasmo.com/).
 
-![image](https://user-images.githubusercontent.com/17295145/186449819-87981a46-d822-4c68-8651-001ccadc3af7.png)
+![image](./screenshot-extension.png)
 
 ## Installation
 
-1. Download the latest [toggle-exeperments-extension.zip](https://github.com/aaron5670/toggle-experiments-extension/releases) here.
-2. Go in your (Chrome) browser to **chrome://extensions/** and click on **Load unpacked**.
-3. Upload the toggle-exeperments-extension.zip you downloaded before.
-4. Enjoy! 🙂
+1. Download the latest [toggle-experiments-extension.zip](https://github.com/aaron5670/toggle-experiments-extension/releases) here.
+2. Unzip the file and store it somewhere on your computer.
+3Go in your (Chrome) browser to **chrome://extensions/**, enable **enable Developer Mode** and click on **Load unpacked**.
+3. Upload the **toggle-experiments-extension** folder you just unzipped.
+4. Enjoy! 🙂🧪
+
+### Search for experiments
+If you want to search for Optimizely experiments, you need a Personal Access Token from Optimizely.
+You can find it in your [Optimizely account](https://app.optimizely.com/v2/profile/api).
+
+
+---
+
 
 ## Development
 
@@ -21,7 +32,7 @@ pnpm dev
 npm run dev
 ```
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser,
+Open your browser and load the appropriate development build. For example, if you are developing for the Chrome browser,
 using manifest v3, use: `build/chrome-mv3-dev`.
 
 For further guidance, [visit our Documentation](https://docs.plasmo.com/)
@@ -49,6 +60,6 @@ Click on "Load Unpacked" and navigate to your extension's `build/chrome-mv3-dev`
 
 To see your popup, click on the puzzle piece icon on the Chrome toolbar, and click on your extension.
 
-**Pro tip:** pin your extension to the Chrome toolbar for easy access by clicking the pin button.
+**Pro-tip:** pin your extension to the Chrome toolbar for easy access by clicking the pin button.
 
 ![](https://docs.plasmo.com/screenshots/popup_example.png)

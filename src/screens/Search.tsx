@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { Card, Text } from "@mantine/core";
+import { TextInput, ActionIcon, useMantineTheme, Card, Text, Loader } from "@mantine/core";
+import { IconSearch, IconArrowRight } from "@tabler/icons";
 import { useDebouncedValue } from "@mantine/hooks";
 import useStore from "~store/useStore";
-import FloatingLabelInput from "~components/FloatingLabelInput";
 import Header from "~components/Header";
 import SearchItem from "~components/SearchItem";
 
 function Search() {
+  const theme = useMantineTheme();
   const { optimizelyAccessToken, setScreen } = useStore(state => state);
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 300);
@@ -46,19 +47,32 @@ function Search() {
     <Card p="lg" radius="md">
       <Header title="Search Experiment" />
       {optimizelyAccessToken ? (
-        <FloatingLabelInput
-          label="Experiment name"
+        <TextInput
           value={value}
-          onChange={setValue}
-          loading={loading}
-        />) : (
+          onChange={(event) => setValue(event.target.value)}
+          icon={<IconSearch size={18} stroke={1.5} />}
+          radius="xl"
+          size="sm"
+          rightSection={
+            loading ? (
+                <Loader size="xs" />
+            ) : (
+              <ActionIcon size={28} radius="xl" color={theme.primaryColor} variant="filled">
+                <IconArrowRight size={16} stroke={1.5} />
+              </ActionIcon>
+            )
+          }
+          placeholder="Search experiments"
+          rightSectionWidth={37}
+        />
+      ) : (
         <span>
           Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")} href="#">settings screen</a> to set it.
         </span>
       )}
       {experiments?.length > 0 && (
         <>
-          <Text size="sm" mt="md">
+          <Text size={15} mt="md">
             {experiments.length} experiments found
           </Text>
           {experiments.map((experiment) => (
