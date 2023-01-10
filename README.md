@@ -10,9 +10,9 @@ Build with [Plasmo](https://docs.plasmo.com/).
 
 1. Download the latest [toggle-experiments-extension.zip](https://github.com/aaron5670/toggle-experiments-extension/releases) here.
 2. Unzip the file and store it somewhere on your computer.
-3Go in your (Chrome) browser to **chrome://extensions/**, enable **enable Developer Mode** and click on **Load unpacked**.
-3. Upload the **toggle-experiments-extension** folder you just unzipped.
-4. Enjoy! 🙂🧪
+3. Go in your (Chrome) browser to **chrome://extensions/**, enable **enable Developer Mode** and click on **Load unpacked**.
+4. Upload the **toggle-experiments-extension** folder you just unzipped.
+5. Enjoy! 🙂🧪
 
 ### Search for experiments
 If you want to search for Optimizely experiments, you need a Personal Access Token from Optimizely.
