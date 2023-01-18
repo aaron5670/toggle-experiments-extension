@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Storage } from "@plasmohq/storage"
 import useStore from "~store/useStore";
 import HomeScreen from "~screens/Home";
+import History from "~screens/History"
 import Settings from "~screens/Settings";
 import Search from "~screens/Search";
 import type { Screen } from "~types/types";
@@ -26,8 +27,9 @@ function IndexPopup() {
   }, []);
 
   return (
-    <div style={{width: 300}}>
+    <div style={{width: 350}}>
       {screen === "home" && <HomeScreen />}
+      {screen === "history" && <History />}
       {screen === "settings" && <Settings />}
       {screen === "search" && <Search />}
     </div>

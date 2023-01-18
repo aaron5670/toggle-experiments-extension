@@ -33,6 +33,7 @@ const DefaultScreenSegmentField = () => {
         value={defaultScreen}
         data={[
           { label: 'Home', value: 'home' },
+          { label: 'History', value: 'history' },
           { label: 'Search', value: 'search' },
           { label: 'Settings', value: 'settings' },
         ]}

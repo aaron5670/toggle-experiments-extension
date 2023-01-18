@@ -3,6 +3,8 @@ import { Anchor, Avatar, Box, Button, Collapse, createStyles, Divider, Group, Lo
 import { IconPlayerPlay, IconPlayerPause, IconPencil, IconQuestionMark, IconExternalLink } from "@tabler/icons";
 import useStore from "~store/useStore";
 import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
+import { Storage } from "@plasmohq/storage";
+import type { HistoryItems } from '~types/types';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -27,9 +29,11 @@ interface SearchItemProps {
   };
 }
 
+const storage = new Storage()
+
 const SearchItem = ({ experiment }: SearchItemProps) => {
   const { classes } = useStyles();
-  const { localStorageKey, setLocalStorageValue, optimizelyAccessToken } = useStore(state => state);
+  const { localStorageKey, setLocalStorageValue, optimizelyAccessToken, setHistoryItems } = useStore(state => state);
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
@@ -59,8 +63,27 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
     fetchExperiment();
   }, [opened]);
 
-  const saveToLocalStorage = (value) => {
+  const addHistoryItem = async (newItem: HistoryItems) => {
+    const maxHistoryItems = 3;
+    const historyItemsLocalStorage = await storage.get("history");
+    const newHistoryItems = historyItemsLocalStorage ? JSON.parse(historyItemsLocalStorage) : []
+    
+    if(newHistoryItems.find((item: { key: string; }) => item.key === newItem.key)) {
+      return;
+    }
+
+    if(newHistoryItems.length === maxHistoryItems) {
+      newHistoryItems.shift();
+    }
+
+    newHistoryItems.push(newItem);
+    setHistoryItems(newHistoryItems);
+  }
+
+  const saveToLocalStorage = (value, experimentName) => {
     setLocalStorageValue(value);
+    addHistoryItem({name: experimentName, key: value});
+    
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       updateLocalStorageValue(tabs[0].id, localStorageKey, value);
     });
@@ -133,7 +156,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
                 <Button
                   variant="default"
                   key={item.user_id}
-                  onClick={() => saveToLocalStorage(item.user_id)}
+                  onClick={() => saveToLocalStorage(item.user_id, experiment.name)}
                 >
                   {item.user_id}
                 </Button>
