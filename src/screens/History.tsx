@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Header from "~components/Header";
-import { Anchor, Card, Center, Button, Box, Container } from "@mantine/core";
+import { Anchor, Card, Center, Button, Container } from "@mantine/core";
 import { IconTrash } from "@tabler/icons";
 import { Storage } from "@plasmohq/storage";
 import useStore from "~store/useStore";
 
 import { HistoryItems } from "~components/HistoryItems";
 
-const storage = new Storage()
+const storage = new Storage();
 
 const History = () => {
   const [historyItems, setHistoryItems] = useState([]);
@@ -16,13 +16,13 @@ const History = () => {
   useEffect(() => {
     const load = async () => {
       const historyLocalStorage = await storage.get("history");
-      if(historyLocalStorage) {
+      if (historyLocalStorage) {
         const historyItemArray = JSON.parse(historyLocalStorage);
-        if(historyItemArray?.length > 0) {
+        if (historyItemArray?.length > 0) {
           setHistoryItems(historyItemArray);
         }
       }
-    }
+    };
     load();
   }, []);
 
@@ -33,31 +33,33 @@ const History = () => {
 
   return (
     <>
-    <Card p="lg" radius="md">
-      <Header title="History" />
-      <HistoryItems links={historyItems} active={localStorageValue} />
-      <Container size="xs" py="sm" px={0}>
-      <Button
-        variant="default"
-        leftIcon={<IconTrash size="14" />}
-        sx={(theme) => ({
-          fontSize: theme.fontSizes.sm,
-          fontWeight:"normal",
-        })}
-        onClick={(e) => clearHistory(e)}
-      >
-        Clear history
-      </Button>
-      </Container>
-      <Center>
-        <Anchor href="https://github.com/aaron5670/toggle-experiments-extension" target="_blank" mt="md">
-          GitHub
-        </Anchor>
-      </Center>
-    </Card>
+      <Card p="lg" radius="md">
+        <Header title="History" />
+        <HistoryItems links={historyItems} active={localStorageValue} />
+        <Container size="xs" py="sm" px={0}>
+          <Center>
+            <Button
+              variant="default"
+              leftIcon={<IconTrash size="14" />}
+              sx={(theme) => ({
+                fontSize: theme.fontSizes.sm,
+                fontWeight: "normal"
+              })}
+              onClick={(e) => clearHistory(e)}
+            >
+              Clear history
+            </Button>
+          </Center>
+        </Container>
+        <Center>
+          <Anchor href="https://github.com/aaron5670/toggle-experiments-extension" target="_blank" mt="md">
+            GitHub
+          </Anchor>
+        </Center>
+      </Card>
     </>
   );
-} 
+};
 
 
 export default History;
