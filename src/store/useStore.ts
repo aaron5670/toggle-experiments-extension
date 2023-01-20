@@ -1,7 +1,7 @@
 import create from 'zustand';
 import produce from 'immer';
 import { Storage } from "@plasmohq/storage"
-import type { Screen } from '~/types/types';
+import type { Screen, HistoryItems } from '~/types/types';
 
 interface FieldState {
   screen: Screen;
@@ -14,6 +14,8 @@ interface FieldState {
   setDefaultScreen: (screen: Screen) => void;
   optimizelyAccessToken: string;
   setOptimizelyAccessToken: (token: string) => void;
+  historyItems: Array<HistoryItems>;
+  setHistoryItems: (historyItems: Array<HistoryItems>) => void;
 }
 
 const storage = new Storage()
@@ -24,6 +26,7 @@ const useStore = create<FieldState>((set) => ({
   localStorageKey: '',
   localStorageValue: '',
   optimizelyAccessToken: '',
+  historyItems: [],
 
   setScreen: (screen) => set(() => ({ screen })),
   setDefaultScreen: (screen) => set(produce((state) => {
@@ -41,6 +44,10 @@ const useStore = create<FieldState>((set) => ({
   setOptimizelyAccessToken: (token) => set(produce((state) => {
     state.optimizelyAccessToken = token;
     storage.set("optimizelyAccessToken", token);
+  })),
+  setHistoryItems: (history) => set(produce((state) => {
+    state.historyItems = history;
+    storage.set("history", JSON.stringify(history));
   })),
 }));
 

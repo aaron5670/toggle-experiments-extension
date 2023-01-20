@@ -1,5 +1,5 @@
 import { ActionIcon, Group, Text } from "@mantine/core";
-import { IconAdjustments, IconSearch, IconX } from "@tabler/icons";
+import { IconAdjustments, IconSearch, IconX, IconHistory } from "@tabler/icons";
 import useStore from "~store/useStore";
 
 interface HeaderProps {
@@ -24,6 +24,11 @@ const Header = ({ title, description = "" }: HeaderProps) => {
           {title}
         </Text>
         <Group position="right" spacing={1}>
+          <ActionIcon
+            onClick={() => setScreen(screen === "history" ? "home" : "history")}
+          >
+            {screen === "history" ? (<IconX />) : (<IconHistory />)}
+          </ActionIcon>
           <ActionIcon
             onClick={() => setScreen(screen === "search" ? "home" : "search")}
           >
