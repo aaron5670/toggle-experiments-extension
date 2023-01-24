@@ -2,12 +2,13 @@
   "name": "toggle-experiment",
   "displayName": "Toggle Experiment",
   "description": "A browser extension to inject the LocalStorage of a website for Optimizely experiments.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": "Aaron van den Berg",
   "homepage": "https://aaronvandenberg.nl/",
   "scripts": {
     "dev": "plasmo dev",
-    "build": "plasmo build"
+    "build": "plasmo build",
+    "package": "plasmo package"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -16,19 +17,19 @@
     "@plasmohq/storage": "^0.12.2",
     "@tabler/icons": "^1.104.0",
     "immer": "^9.0.15",
-    "plasmo": "0.60.2",
+    "plasmo": "0.63.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zustand": "^4.1.2"
   },
   "devDependencies": {
-    "@plasmohq/prettier-plugin-sort-imports": "3.5.4",
-    "@types/chrome": "0.0.197",
-    "@types/node": "18.8.5",
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
+    "@plasmohq/prettier-plugin-sort-imports": "3.6.0",
+    "@types/chrome": "0.0.202",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
     "prettier": "2.7.1",
-    "typescript": "4.8.4"
+    "typescript": "4.9.3"
   },
   "manifest": {
     "host_permissions": [

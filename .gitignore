@@ -44,3 +44,5 @@ keys.json
 .tsbuildinfo
 
 .npmrc
+
+key.json
