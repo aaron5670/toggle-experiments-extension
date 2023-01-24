@@ -10,6 +10,8 @@ interface FieldState {
   setLocalStorageKey: (localStorageKey: string) => void;
   localStorageValue: string;
   setLocalStorageValue: (value: string) => void;
+  setOptimizelyProjectId: (optimizelyProjectId: string) => void;
+  optimizelyProjectId?: string;
   defaultScreen: Screen;
   setDefaultScreen: (screen: Screen) => void;
   optimizelyAccessToken: string;
@@ -26,6 +28,7 @@ const useStore = create<FieldState>((set) => ({
   localStorageKey: '',
   localStorageValue: '',
   optimizelyAccessToken: '',
+  optimizelyProjectId: null,
   historyItems: [],
 
   setScreen: (screen) => set(() => ({ screen })),
@@ -44,6 +47,10 @@ const useStore = create<FieldState>((set) => ({
   setOptimizelyAccessToken: (token) => set(produce((state) => {
     state.optimizelyAccessToken = token;
     storage.set("optimizelyAccessToken", token);
+  })),
+  setOptimizelyProjectId: (projectId) => set(produce((state) => {
+    state.optimizelyProjectId = projectId;
+    storage.set("optimizelyProjectId", projectId);
   })),
   setHistoryItems: (history) => set(produce((state) => {
     state.historyItems = history;
