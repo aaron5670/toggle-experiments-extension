@@ -8,6 +8,12 @@ Build with [Plasmo](https://docs.plasmo.com/).
 
 ## Installation
 
+## Chrome Web Store installation
+
+1. Install the Chromium extension [here](https://chrome.google.com/webstore/detail/toggle-experiment/bfcajgcjbnmpblmomjphdaiodkfjjcdn).
+
+## Manual installation
+
 1. Download the latest [toggle-experiments-extension.zip](https://github.com/aaron5670/toggle-experiments-extension/releases) here.
 2. Unzip the file and store it somewhere on your computer.
 3. Go in your (Chrome) browser to **chrome://extensions/**, enable **enable Developer Mode** and click on **Load unpacked**.
