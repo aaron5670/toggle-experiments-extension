@@ -1,5 +1,5 @@
-export type Screen = 'home' | 'history' | 'settings' | 'search';
+export type Screen = 'home' | 'history' | 'settings' | 'search' | 'connect-optimizely';
 export interface HistoryItems {
-  name: string, 
+  name: string,
   key: string,
 }

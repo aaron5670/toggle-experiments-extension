@@ -8,7 +8,7 @@ import SearchItem from "~components/SearchItem";
 
 function Search() {
   const theme = useMantineTheme();
-  const { optimizelyAccessToken, setScreen } = useStore(state => state);
+  const { optimizelyAccessToken, optimizelyProjectId, setScreen } = useStore(state => state);
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 300);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ function Search() {
       try {
         if (debounced.length > 0) {
           setLoading(true);
-          const response = await fetch(`https://api.optimizely.com/v2/search?project_id=17209910795&per_page=100&page=1&query=${value}&type=experiment`, {
+          const response = await fetch(`https://api.optimizely.com/v2/search?project_id=${optimizelyProjectId}&per_page=100&page=1&query=${value}&type=experiment`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${optimizelyAccessToken}`
@@ -46,7 +46,7 @@ function Search() {
   return (
     <Card p="lg" radius="md">
       <Header title="Search Experiment" />
-      {optimizelyAccessToken ? (
+      {optimizelyAccessToken && optimizelyProjectId ? (
         <TextInput
           value={value}
           onChange={(event) => setValue(event.target.value)}

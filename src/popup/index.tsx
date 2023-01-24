@@ -6,11 +6,12 @@ import History from "~screens/History"
 import Settings from "~screens/Settings";
 import Search from "~screens/Search";
 import type { Screen } from "~types/types";
+import ConnectOptimizely from "~screens/ConnectOptimizely";
 
 const storage = new Storage()
 
 function IndexPopup() {
-  const {setLocalStorageValue, screen, setLocalStorageKey, setOptimizelyAccessToken, setScreen} = useStore(state => state);
+  const {setLocalStorageValue, screen, setLocalStorageKey, setOptimizelyAccessToken, setOptimizelyProjectId, setScreen} = useStore(state => state);
 
   useEffect(() => {
     const load = async () => {
@@ -18,9 +19,11 @@ function IndexPopup() {
       const value = await storage.get("localStorageValue");
       const defaultScreen = await storage.get<Screen | null>("defaultScreen");
       const optimizelyAccessToken = await storage.get("optimizelyAccessToken");
+      const optimizelyProjectId = await storage.get("optimizelyProjectId");
       setLocalStorageKey(key ?? "optimizelyNonLoggedInUser");
       setLocalStorageValue(value ?? "");
       setOptimizelyAccessToken(optimizelyAccessToken ?? "");
+      setOptimizelyProjectId(optimizelyProjectId ?? null);
       setScreen(defaultScreen ?? "home");
     }
     load();
@@ -32,6 +35,7 @@ function IndexPopup() {
       {screen === "history" && <History />}
       {screen === "settings" && <Settings />}
       {screen === "search" && <Search />}
+      {screen === "connect-optimizely" && <ConnectOptimizely />}
     </div>
   );
 }
