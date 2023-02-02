@@ -5,7 +5,7 @@ specifiers:
   '@mantine/core': ^5.9.5
   '@mantine/hooks': ^5.9.5
   '@plasmohq/prettier-plugin-sort-imports': 3.6.1
-  '@plasmohq/storage': ^0.12.2
+  '@plasmohq/storage': ^0.15.0
   '@tabler/icons': ^1.104.0
   '@types/chrome': 0.0.211
   '@types/node': 18.11.18
@@ -23,7 +23,7 @@ dependencies:
   '@emotion/react': 11.10.4_3stiutgnnbnfnf3uowm5cip22i
   '@mantine/core': 5.9.5_3hnvoyh3titygo7rz2ru6iwuma
   '@mantine/hooks': 5.9.5_react@18.2.0
-  '@plasmohq/storage': 0.12.2_react@18.2.0
+  '@plasmohq/storage': 0.15.0_react@18.2.0
   '@tabler/icons': 1.104.0_biqbaboplfbrettd7655fr4n2y
   immer: 9.0.15
   plasmo: 0.64.4_biqbaboplfbrettd7655fr4n2y
@@ -2097,8 +2097,8 @@ packages:
       - supports-color
     dev: true
 
-  /@plasmohq/storage/0.12.2_react@18.2.0:
-    resolution: {integrity: sha512-TF3EBqkRYVnLTE+qNW2BjMK572f6CL4MRtmEd4LJxpzRH3TrxTakjGDuBMhc3IfSCcNjSFsVzF+Qc/ZGgj1edQ==}
+  /@plasmohq/storage/0.15.0_react@18.2.0:
+    resolution: {integrity: sha512-521NLNVEncdNTmoafLyyaN1huvISLqyJtKDdcYhiGaN2LEOZZaSMAxEeBh/S0MWq/C03IetXfIkuWKFwrXUbkw==}
     peerDependencies:
       react: ^16.8.6 || ^17 || ^18
     peerDependenciesMeta:

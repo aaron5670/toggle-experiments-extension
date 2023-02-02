@@ -14,7 +14,7 @@
     "@emotion/react": "^11.10.4",
     "@mantine/core": "^5.9.5",
     "@mantine/hooks": "^5.9.5",
-    "@plasmohq/storage": "^0.12.2",
+    "@plasmohq/storage": "^0.15.0",
     "@tabler/icons": "^1.104.0",
     "immer": "^9.0.15",
     "plasmo": "0.64.4",
