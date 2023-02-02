@@ -31,4 +31,11 @@ jobs:
           cache: "pnpm"
 
       - name: Build the extension
-        run: pnpm build
+        run: pnpm build --zip
+
+      - name: Archive Toggle Experiments Extension production build as ZIP
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.sha }}-prod-build
+          path: build/chrome-mv3-prod.zip
+          retention-days: 30
