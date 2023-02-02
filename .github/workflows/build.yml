@@ -36,6 +36,6 @@ jobs:
       - name: Archive Toggle Experiments Extension production build as ZIP
         uses: actions/upload-artifact@v3
         with:
-          name: "$GITHUB_HEAD_REF-prod-build"
+          name: ${{env.GITHUB_HEAD_REF}}-prod-build
           path: build/chrome-mv3-prod.zip
           retention-days: 14
