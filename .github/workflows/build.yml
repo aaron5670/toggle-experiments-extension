@@ -38,14 +38,4 @@ jobs:
         with:
           name: ${{ github.sha }}-prod-build
           path: build/chrome-mv3-prod.zip
-          retention-days: 14
-
-      - name: add artifact links to pull request and related issues step
-        uses: tonyhallett/artifacts-url-comments@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          prefix: Here you can get the production build of the extension with the changes you have made.
-          suffix: Have a nice day! 👋
-          format: name
-          addTo: pullandissues
+          retention-days: 30
