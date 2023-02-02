@@ -1,5 +1,5 @@
 import { ActionIcon, Card, Grid } from "@mantine/core";
-import { IconTrash } from "@tabler/icons";
+import { IconTrash } from "@tabler/icons-react";
 import { removeLocalStorageValue, updateLocalStorageValue } from "~handlers/localStorageHandlers";
 import useStore from "~store/useStore";
 import SaveButton from "~components/SaveButton";

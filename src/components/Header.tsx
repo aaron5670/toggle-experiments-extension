@@ -1,5 +1,5 @@
 import { ActionIcon, Group, Text } from "@mantine/core";
-import { IconAdjustments, IconSearch, IconX, IconHistory } from "@tabler/icons";
+import { IconAdjustments, IconSearch, IconX, IconHistory } from "@tabler/icons-react";
 import useStore from "~store/useStore";
 
 interface HeaderProps {

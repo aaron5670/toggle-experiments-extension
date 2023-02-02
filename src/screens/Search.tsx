@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TextInput, ActionIcon, useMantineTheme, Card, Text, Loader } from "@mantine/core";
-import { IconSearch, IconArrowRight } from "@tabler/icons";
+import { IconSearch, IconArrowRight } from "@tabler/icons-react";
 import { useDebouncedValue } from "@mantine/hooks";
 import useStore from "~store/useStore";
 import Header from "~components/Header";

@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import { IconCopy } from "@tabler/icons";
+import { IconCopy } from "@tabler/icons-react";
 
 const SaveButton = ({ text }: { text: string }) => {
   return (

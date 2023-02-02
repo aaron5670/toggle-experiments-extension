@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "~components/Header";
 import { Anchor, Card, Center, Button, Container } from "@mantine/core";
-import { IconTrash } from "@tabler/icons";
+import { IconTrash } from "@tabler/icons-react";
 import { Storage } from "@plasmohq/storage";
 import useStore from "~store/useStore";
 

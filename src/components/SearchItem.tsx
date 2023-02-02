@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Anchor, Avatar, Box, Button, Collapse, createStyles, Divider, Group, Loader, Text } from "@mantine/core";
-import { IconPlayerPlay, IconPlayerPause, IconPencil, IconQuestionMark, IconExternalLink } from "@tabler/icons";
+import { IconPlayerPlay, IconPlayerPause, IconPencil, IconQuestionMark, IconExternalLink } from "@tabler/icons-react";
 import useStore from "~store/useStore";
 import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
 import { Storage } from "@plasmohq/storage";
@@ -67,7 +67,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
     const maxHistoryItems = 3;
     const historyItemsLocalStorage = await storage.get("history");
     const newHistoryItems = historyItemsLocalStorage ? JSON.parse(historyItemsLocalStorage) : []
-    
+
     if(newHistoryItems.find((item: { key: string; }) => item.key === newItem.key)) {
       return;
     }
@@ -83,7 +83,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
   const saveToLocalStorage = (value, experimentName) => {
     setLocalStorageValue(value);
     addHistoryItem({name: experimentName, key: value});
-    
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       updateLocalStorageValue(tabs[0].id, localStorageKey, value);
     });

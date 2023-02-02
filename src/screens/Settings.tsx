@@ -3,7 +3,7 @@ import Header from "~components/Header";
 import LocalStorageField from "~components/settings/LocalStorageInputField";
 import DefaultScreenSegmentField from "~components/settings/DefaultScreenSegmentField";
 import useStore from "~store/useStore";
-import { IconDatabase } from "@tabler/icons";
+import { IconDatabase } from "@tabler/icons-react";
 
 const Settings = () => {
   const { setScreen } = useStore(state => state);
