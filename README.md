@@ -12,13 +12,14 @@ Build with [Plasmo](https://docs.plasmo.com/).
 
 1. Install the Chromium extension [here](https://chrome.google.com/webstore/detail/toggle-experiment/bfcajgcjbnmpblmomjphdaiodkfjjcdn).
 
-## Manual installation
+## Manual build and installation
 
-1. Download the latest [toggle-experiments-extension.zip](https://github.com/aaron5670/toggle-experiments-extension/releases) here.
-2. Unzip the file and store it somewhere on your computer.
-3. Go in your (Chrome) browser to **chrome://extensions/**, enable **enable Developer Mode** and click on **Load unpacked**.
-4. Upload the **toggle-experiments-extension** folder you just unzipped.
-5. Enjoy! 🙂🧪
+1. Clone this repository locally.
+2. Install the dependencies with ``pnpm install``.
+3. Create a build with ``pnpm build``.
+4. Go in your (Chrome) browser to **chrome://extensions/**, enable **enable Developer Mode** and click on **Load unpacked**.
+5. Upload the **chrome-mv3-prod** folder you just build.
+6. Enjoy! 🙂🧪
 
 ### Search for experiments
 If you want to search for Optimizely experiments, you need a Personal Access Token from Optimizely.
