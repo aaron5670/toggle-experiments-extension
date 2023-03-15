@@ -7,3 +7,7 @@ export const deleteLocalStorageValue = (localStorageKey: string): void => {
   localStorage.removeItem(localStorageKey);
   document.location.reload();
 }
+
+export const getLocalStorageValue = (localStorageKey: string): string => {
+  return localStorage.getItem(localStorageKey);
+}

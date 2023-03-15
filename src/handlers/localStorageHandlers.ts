@@ -1,4 +1,4 @@
-import { deleteLocalStorageValue, setLocalStorageValue } from "~local-storage-injector";
+import { deleteLocalStorageValue, getLocalStorageValue, setLocalStorageValue } from "~local-storage-injector";
 
 export const updateLocalStorageValue = async (tabId, localStorageKey, localStorageValue) => {
   await chrome.scripting.executeScript(
@@ -21,3 +21,14 @@ export const removeLocalStorageValue = async (tabId, localStorageKey) => {
     }
   );
 };
+
+export const getCurrentLocalStorageValue = async (tabId, localStorageKey) => {
+  return chrome.scripting.executeScript(
+    {
+      target: { tabId },
+      world: "MAIN", // MAIN in order to access the window object
+      func: getLocalStorageValue,
+      args: [localStorageKey]
+    }
+  );
+}
