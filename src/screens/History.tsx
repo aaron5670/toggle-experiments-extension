@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import Header from "~components/Header";
-import { Anchor, Card, Center, Button, Container } from "@mantine/core";
+import { Card, Center, Button, Container } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { Storage } from "@plasmohq/storage";
 import useStore from "~store/useStore";
@@ -8,28 +7,18 @@ import useStore from "~store/useStore";
 import { HistoryItems } from "~components/HistoryItems";
 
 const storage = new Storage();
+const broadcastChannel = new BroadcastChannel('broadcastChannel');
 
 const History = () => {
-  const [historyItems, setHistoryItems] = useState([]);
-  const { localStorageValue } = useStore(state => state);
-
-  useEffect(() => {
-    const load = async () => {
-      const historyLocalStorage = await storage.get("history");
-      if (historyLocalStorage) {
-        const historyItemArray = JSON.parse(historyLocalStorage);
-        if (historyItemArray?.length > 0) {
-          setHistoryItems(historyItemArray);
-        }
-      }
-    };
-    load();
-  }, []);
+  const { localStorageValue, historyItems, setHistoryItems } = useStore(state => state);
 
   const clearHistory = async (e) => {
     e.preventDefault();
     setHistoryItems([]);
     await storage.remove("history");
+
+    // broadcast to service worker
+    broadcastChannel.postMessage({ history: null });
   };
 
   return (
@@ -52,11 +41,6 @@ const History = () => {
             </Button>
           </Center>
         </Container>
-        <Center>
-          <Anchor href="https://github.com/aaron5670/toggle-experiments-extension" target="_blank" mt="md">
-            GitHub
-          </Anchor>
-        </Center>
       </Card>
     </>
   );

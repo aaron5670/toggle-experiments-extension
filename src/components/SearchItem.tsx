@@ -4,7 +4,9 @@ import { IconPlayerPlay, IconPlayerPause, IconPencil, IconQuestionMark, IconExte
 import useStore from "~store/useStore";
 import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
 import { Storage } from "@plasmohq/storage";
-import type { HistoryItems } from '~types/types';
+import type { HistoryItems } from "~types/types";
+
+const broadcastChannel = new BroadcastChannel("broadcastChannel");
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -29,7 +31,7 @@ interface SearchItemProps {
   };
 }
 
-const storage = new Storage()
+const storage = new Storage();
 
 const SearchItem = ({ experiment }: SearchItemProps) => {
   const { classes } = useStyles();
@@ -66,23 +68,26 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
   const addHistoryItem = async (newItem: HistoryItems) => {
     const maxHistoryItems = 3;
     const historyItemsLocalStorage = await storage.get("history");
-    const newHistoryItems = historyItemsLocalStorage ? JSON.parse(historyItemsLocalStorage) : []
+    const newHistoryItems = historyItemsLocalStorage ? JSON.parse(historyItemsLocalStorage) : [];
 
-    if(newHistoryItems.find((item: { key: string; }) => item.key === newItem.key)) {
+    if (newHistoryItems.find((item: { key: string; }) => item.key === newItem.key)) {
       return;
     }
 
-    if(newHistoryItems.length === maxHistoryItems) {
+    if (newHistoryItems.length >= maxHistoryItems) {
       newHistoryItems.shift();
     }
 
     newHistoryItems.push(newItem);
     setHistoryItems(newHistoryItems);
-  }
+
+    // Broadcast history to service worker
+    broadcastChannel.postMessage({ history: newHistoryItems });
+  };
 
   const saveToLocalStorage = (value, experimentName) => {
     setLocalStorageValue(value);
-    addHistoryItem({name: experimentName, key: value});
+    addHistoryItem({ name: experimentName, key: value });
 
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       updateLocalStorageValue(tabs[0].id, localStorageKey, value);
@@ -141,7 +146,9 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
                 </Text>
               </Group>
               <Text>
-                <Anchor href={`https://app.optimizely.com/v2/projects/${experiment.project_id}/experiments/${experiment.id}`} target="_blank">
+                <Anchor
+                  href={`https://app.optimizely.com/v2/projects/${experiment.project_id}/experiments/${experiment.id}`}
+                  target="_blank">
                   <IconExternalLink size={18} stroke={1.5} style={{ marginBottom: -4 }} /> Optimizely
                 </Anchor>
               </Text>
