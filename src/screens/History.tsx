@@ -26,9 +26,10 @@ const History = () => {
     load();
   }, []);
 
-  const clearHistory = (e) => {
+  const clearHistory = async (e) => {
     e.preventDefault();
     setHistoryItems([]);
+    await storage.remove("history");
   };
 
   return (

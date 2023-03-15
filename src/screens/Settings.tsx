@@ -1,9 +1,11 @@
-import { Anchor, Button, Card, Center } from "@mantine/core";
+import { Anchor, Button, Card, Center, Group } from "@mantine/core";
 import Header from "~components/Header";
 import LocalStorageField from "~components/settings/LocalStorageInputField";
 import DefaultScreenSegmentField from "~components/settings/DefaultScreenSegmentField";
 import useStore from "~store/useStore";
 import { IconDatabase } from "@tabler/icons-react";
+
+const manifestData = chrome.runtime.getManifest();
 
 const Settings = () => {
   const { setScreen } = useStore(state => state);
@@ -22,11 +24,14 @@ const Settings = () => {
           Connect to Optimizely
         </Button>
       </Center>
-      <Center>
+      <Group position="center">
         <Anchor href="https://github.com/aaron5670/toggle-experiments-extension" target="_blank" mt="md">
           GitHub
         </Anchor>
-      </Center>
+        <Anchor href={`https://github.com/aaron5670/toggle-experiments-extension/releases/v${manifestData.version}`} target="_blank" mt="md">
+          v{manifestData.version}
+        </Anchor>
+      </Group>
     </Card>
   );
 };
