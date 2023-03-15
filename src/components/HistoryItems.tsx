@@ -39,24 +39,19 @@ interface HistoryItemsProps {
 export function HistoryItems({ links, active }: HistoryItemsProps) {
   const { classes, cx } = useStyles();
   const { localStorageKey, setLocalStorageValue } = useStore(state => state);
-  
+
   const saveToLocalStorage = (value) => {
     setLocalStorageValue(value);
-    
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       updateLocalStorageValue(tabs[0].id, localStorageKey, value);
     });
   };
-  
-  const setHistoryValue = (e, itemKey) => {
-    e.preventDefault(); 
-    saveToLocalStorage(itemKey);
-  }
 
   const items = links.map((item) => (
     <Box<'a'>
       component="a"
-      onClick={(event) => setHistoryValue(event, item.key)}
+      onClick={() => saveToLocalStorage(item.key)}
       key={item.key}
       className={cx(classes.link, { [classes.linkActive]: active === item.key })}
     >
