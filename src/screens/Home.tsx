@@ -1,13 +1,26 @@
-import { ActionIcon, Card, Grid } from "@mantine/core";
+import { ActionIcon, Card, Grid, TextInput } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
-import { removeLocalStorageValue, updateLocalStorageValue } from "~handlers/localStorageHandlers";
+import {
+  getCurrentLocalStorageValue,
+  removeLocalStorageValue,
+  updateLocalStorageValue
+} from "~handlers/localStorageHandlers";
 import useStore from "~store/useStore";
 import SaveButton from "~components/SaveButton";
-import FloatingLabelInput from "~components/FloatingLabelInput";
 import Header from "~components/Header";
+import { useEffect } from "react";
 
 function IndexPopup() {
   const { localStorageKey, localStorageValue, setLocalStorageValue } = useStore(state => state);
+
+  useEffect(() => {
+    chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
+      const [localStorage] = await getCurrentLocalStorageValue(tabs[0].id, localStorageKey);
+      if (localStorage?.result) {
+        setLocalStorageValue(localStorage.result);
+      }
+    });
+  }, [localStorageKey]);
 
   const saveToLocalStorage = (e) => {
     e.preventDefault();
@@ -33,10 +46,12 @@ function IndexPopup() {
       <form onSubmit={saveToLocalStorage}>
         <Grid>
           <Grid.Col span={10}>
-            <FloatingLabelInput
-              label="Optimizely username"
+            <TextInput
+              placeholder="exp123-variant"
+              label="LocalStorage value"
+              radius="xl"
               value={localStorageValue}
-              onChange={setLocalStorageValue}
+              onChange={(e) => setLocalStorageValue(e.currentTarget.value)}
             />
           </Grid.Col>
           <Grid.Col span={2}>

@@ -11,9 +11,9 @@
   ],
   "packageRules": [
     {
-      "matchDepTypes": ["devDependencies", "dependencies"],
+      "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["patch"],
-      "groupName": "(Dev) Dependencies (patch)",
+      "groupName": "Development dependencies (patch)",
       "automerge": true
     },
     {
