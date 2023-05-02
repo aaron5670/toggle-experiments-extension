@@ -159,7 +159,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
             <Divider my="md" />
             <Text weight={500} mb="xs">Whitelisted users</Text>
             <Button.Group orientation="vertical">
-              {experimentData?.whitelist.map((item) => (
+              {experimentData?.whitelist ? experimentData?.whitelist?.map((item) => (
                 <Button
                   variant="default"
                   key={item.user_id}
@@ -167,7 +167,17 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
                 >
                   {item.user_id}
                 </Button>
-              ))}
+              )) : (
+                <Text size="xs" color="dimmed">
+                  No whitelisted users found. {" "}
+                  <Anchor
+                    href={`https://app.optimizely.com/v2/projects/${experiment.project_id}/experiments/${experiment.id}/whitelist`}
+                    target="_blank">
+                    Click here
+                  </Anchor>
+                  {" "}to add some whitelisted users in Optimizely.
+                </Text>
+              )}
             </Button.Group>
           </Box>
         )}
