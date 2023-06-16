@@ -66,9 +66,9 @@ function Search() {
           rightSectionWidth={37}
         />
       ) : (
-        <span>
+        <Text fz="sm">
           Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")} href="#">settings screen</a> to set it.
-        </span>
+        </Text>
       )}
       {experiments?.length > 0 && (
         <>

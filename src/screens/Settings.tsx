@@ -1,4 +1,4 @@
-import { Anchor, Button, Card, Center, Group } from "@mantine/core";
+import { Text, Anchor, Button, Card, Center, Group } from "@mantine/core";
 import Header from "~components/Header";
 import LocalStorageField from "~components/settings/LocalStorageInputField";
 import DefaultScreenSegmentField from "~components/settings/DefaultScreenSegmentField";
@@ -25,12 +25,16 @@ const Settings = () => {
         </Button>
       </Center>
       <Group position="center">
-        <Anchor href="https://github.com/aaron5670/toggle-experiments-extension" target="_blank" mt="md">
-          GitHub
-        </Anchor>
-        <Anchor href={`https://github.com/aaron5670/toggle-experiments-extension/releases/v${manifestData.version}`} target="_blank" mt="md">
-          v{manifestData.version}
-        </Anchor>
+        <Text fz="xs" mt="md">
+          <Anchor href="https://github.com/aaron5670/toggle-experiments-extension" target="_blank" mt="md">
+            GitHub
+          </Anchor>
+          {"  "}
+          <Anchor href={`https://github.com/aaron5670/toggle-experiments-extension/releases/v${manifestData.version}`}
+                  target="_blank" mt="md">
+            v{manifestData.version}
+          </Anchor>
+        </Text>
       </Group>
     </Card>
   );
