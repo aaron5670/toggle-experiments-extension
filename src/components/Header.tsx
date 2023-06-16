@@ -41,7 +41,7 @@ const Header = ({ title, description = "" }: HeaderProps) => {
           </ActionIcon>
         </Group>
       </Group>
-      <Text size="xs" color="dimmed" mt="md"  mb="xl">
+      <Text size="xs" color="dimmed"  mb="xl">
         {description}
       </Text>
     </>
