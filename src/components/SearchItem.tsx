@@ -65,6 +65,8 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
     fetchExperiment();
   }, [opened]);
 
+  console.log(experimentData);
+
   const addHistoryItem = async (newItem: HistoryItems) => {
     const maxHistoryItems = 3;
     const historyItemsLocalStorage = await storage.get("history");
@@ -137,15 +139,18 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
         {loading ? (<Group position="center" my="md"><Loader /></Group>) : (
           <Box mb="md">
             <Group position="apart" my="xs">
-              <Group>
+              <Group position="left">
                 <Text size="xs" fw={500}>
                   Status:
                 </Text>
                 <Text size="xs" weight={500} color={status.color}>
                   {status.name}
                 </Text>
+                <Text size="xs">
+                 {experimentData?.traffic_allocation / 100}% traffic
+                </Text>
               </Group>
-              <Text>
+              <Text size="xs">
                 <Anchor
                   href={`https://app.optimizely.com/v2/projects/${experiment.project_id}/experiments/${experiment.id}`}
                   target="_blank">
