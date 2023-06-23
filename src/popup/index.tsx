@@ -56,7 +56,7 @@ function IndexPopup() {
 
   return (
     <MantineProvider withNormalizeCSS withGlobalStyles>
-      <Notifications position="top-center" />
+      <Notifications position="top-center" style={{cursor: "pointer"}} />
       <div style={{ width: 350 }}>
         {screen === "home" && <HomeScreen />}
         {screen === "history" && <History />}
