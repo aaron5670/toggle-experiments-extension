@@ -30,9 +30,9 @@ const Header = ({ title, description = "" }: HeaderProps) => {
             {screen === "history" ? (<IconX />) : (<IconHistory />)}
           </ActionIcon>
           <ActionIcon
-            onClick={() => setScreen(screen === "search" ? "home" : "search")}
+            onClick={() => setScreen(screen === "search-experiments" ? "home" : "search-experiments")}
           >
-            {screen === "search" ? (<IconX />) : (<IconSearch />)}
+            {screen === "search-experiments" ? (<IconX />) : (<IconSearch />)}
           </ActionIcon>
           <ActionIcon
             onClick={() => setScreen(screen === "settings" ? "home" : "settings")}

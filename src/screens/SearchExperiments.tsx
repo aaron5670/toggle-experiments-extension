@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { TextInput, ActionIcon, useMantineTheme, Card, Text, Loader } from "@mantine/core";
+import { TextInput, ActionIcon, useMantineTheme, Card, Text, Loader, Divider, Anchor, Center } from "@mantine/core";
 import { IconSearch, IconArrowRight } from "@tabler/icons-react";
 import { useDebouncedValue } from "@mantine/hooks";
 import useStore from "~store/useStore";
 import Header from "~components/Header";
 import SearchItem from "~components/SearchItem";
 
-function Search() {
+function SearchExperiments() {
   const theme = useMantineTheme();
   const { optimizelyAccessToken, optimizelyProjectId, setScreen } = useStore(state => state);
   const [value, setValue] = useState("");
@@ -47,27 +47,40 @@ function Search() {
     <Card p="lg" radius="md">
       <Header title="Search Experiment" />
       {optimizelyAccessToken && optimizelyProjectId ? (
-        <TextInput
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          icon={<IconSearch size={18} stroke={1.5} />}
-          radius="xl"
-          size="sm"
-          rightSection={
-            loading ? (
+        <>
+          <TextInput
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            icon={<IconSearch size={18} stroke={1.5} />}
+            radius="xl"
+            size="sm"
+            autoFocus
+            rightSection={
+              loading ? (
                 <Loader size="xs" />
-            ) : (
-              <ActionIcon size={28} radius="xl" color={theme.primaryColor} variant="filled">
-                <IconArrowRight size={16} stroke={1.5} />
-              </ActionIcon>
-            )
-          }
-          placeholder="Search experiments"
-          rightSectionWidth={37}
-        />
-      ) : (
+              ) : (
+                <ActionIcon size={28} radius="xl" color={theme.primaryColor} variant="filled">
+                  <IconArrowRight size={16} stroke={1.5} />
+                </ActionIcon>
+              )
+            }
+            placeholder="Search experiments"
+            rightSectionWidth={37}
+          />
+          {!experiments && (
+            <>
+              <Divider mt="md" label="OR" labelPosition="center" />
+              <Center>
+                <Anchor onClick={() => setScreen("search-features")} size="xs" mt="xs">
+                  Search for feature toggles
+                </Anchor>
+              </Center>
+            </>
+          )}
+        </>
+        ) : (
         <Text fz="sm">
-          Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")} href="#">settings screen</a> to set it.
+          Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")}>settings screen</a> to set it.
         </Text>
       )}
       {experiments?.length > 0 && (
@@ -94,4 +107,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SearchExperiments;

@@ -3,7 +3,8 @@ import useStore from "~store/useStore";
 import HomeScreen from "~screens/Home";
 import History from "~screens/History";
 import Settings from "~screens/Settings";
-import Search from "~screens/Search";
+import SearchExperiments from "~screens/SearchExperiments";
+import SearchFeatures from "~screens/SearchFeatures";
 import ConnectOptimizely from "~screens/ConnectOptimizely";
 import LatestRelease from "~screens/LatestRelease";
 import { MantineProvider } from "@mantine/core";
@@ -21,6 +22,7 @@ function IndexPopup() {
     setOptimizelyAccessToken,
     setOptimizelyProjectId,
     setScreen,
+    setDefaultScreen,
     setHistoryItems
   } = useStore(state => state);
 
@@ -40,7 +42,7 @@ function IndexPopup() {
       setOptimizelyAccessToken(optimizelyAccessToken ?? "");
       setOptimizelyProjectId(optimizelyProjectId ?? null);
       setScreen(defaultScreen ?? "home");
-      // setScreen("latest-release");
+      setDefaultScreen(defaultScreen ?? "home");
       setHistoryItems(history ? JSON.parse(history) : []);
 
       await versionUpdateChecker(setScreen);
@@ -57,11 +59,12 @@ function IndexPopup() {
   return (
     <MantineProvider withNormalizeCSS withGlobalStyles>
       <Notifications position="top-center" style={{cursor: "pointer"}} />
-      <div style={{ width: 350 }}>
+      <div style={{ width: 375 }}>
         {screen === "home" && <HomeScreen />}
         {screen === "history" && <History />}
         {screen === "settings" && <Settings />}
-        {screen === "search" && <Search />}
+        {screen === "search-experiments" && <SearchExperiments />}
+        {screen === "search-features" && <SearchFeatures />}
         {screen === "connect-optimizely" && <ConnectOptimizely />}
         {screen === "latest-release" && <LatestRelease />}
       </div>

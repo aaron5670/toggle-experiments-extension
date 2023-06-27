@@ -11,11 +11,12 @@ const DefaultScreenSegmentField = () => {
       </Text>
       <SegmentedControl
         value={defaultScreen}
+        defaultValue={defaultScreen}
         data={[
           { label: 'Home', value: 'home' },
+          { label: 'Experiments', value: 'search-experiments' },
+          { label: 'Features', value: 'settings' },
           { label: 'History', value: 'history' },
-          { label: 'Search', value: 'search' },
-          { label: 'Settings', value: 'settings' },
         ]}
         onChange={setDefaultScreen}
         radius="md"

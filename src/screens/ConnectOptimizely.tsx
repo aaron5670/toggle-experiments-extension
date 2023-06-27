@@ -72,7 +72,7 @@ const Step3 = ({ projects, handleCancel }) => {
 
   const storeProjectId = (projectId) => {
     setOptimizelyProjectId(projectId);
-    setScreen("search");
+    setScreen("search-experiments");
   };
 
   return (
