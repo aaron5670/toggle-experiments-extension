@@ -4,7 +4,7 @@ import { IconSearch, IconArrowRight } from "@tabler/icons-react";
 import { useDebouncedValue } from "@mantine/hooks";
 import useStore from "~store/useStore";
 import Header from "~components/Header";
-import SearchItem from "~components/SearchItem";
+import FeatureItem from "~components/FeatureItem";
 
 function SearchFeatures() {
   const theme = useMantineTheme();
@@ -12,7 +12,7 @@ function SearchFeatures() {
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 300);
   const [loading, setLoading] = useState(false);
-  const [experiments, setExperiments] = useState(null);
+  const [features, setFeatures] = useState(null);
   const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function SearchFeatures() {
       try {
         if (debounced.length > 0) {
           setLoading(true);
-          const response = await fetch(`https://api.optimizely.com/v2/search?project_id=${optimizelyProjectId}&per_page=100&page=1&query=${value}&type=experiment`, {
+          const response = await fetch(`https://api.optimizely.com/v2/search?project_id=${optimizelyProjectId}&per_page=100&page=1&query=${value}&type=feature`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${optimizelyAccessToken}`
@@ -28,9 +28,9 @@ function SearchFeatures() {
           });
           if (response.ok) {
             const data = await response.json();
-            setExperiments(data);
+            setFeatures(data);
           } else {
-            setError("Error searching for experiments");
+            setError("Error searching for features");
           }
         }
       } catch (error) {
@@ -67,7 +67,7 @@ function SearchFeatures() {
             placeholder="Search features"
             rightSectionWidth={37}
           />
-          {!experiments && (
+          {!features && (
             <>
               <Divider mt="md" label="OR" labelPosition="center" />
               <Center>
@@ -83,19 +83,19 @@ function SearchFeatures() {
           Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")}>settings screen</a> to set it.
         </Text>
       )}
-      {experiments?.length > 0 && (
+      {features?.length > 0 && (
         <>
           <Text size={15} mt="md">
-            {experiments.length} experiments found
+            {features.length} features found
           </Text>
-          {experiments.map((experiment) => (
-            <SearchItem key={experiment.id} experiment={experiment} />
+          {features.map((feature) => (
+            <FeatureItem key={feature.id} feature={feature} />
           ))}
         </>
       )}
-      {experiments?.length === 0 && (
+      {features?.length === 0 && (
         <Text size="sm" mt="md">
-          No experiments found
+          No features found
         </Text>
       )}
       {error && (

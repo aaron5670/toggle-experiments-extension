@@ -4,7 +4,7 @@ import { IconSearch, IconArrowRight } from "@tabler/icons-react";
 import { useDebouncedValue } from "@mantine/hooks";
 import useStore from "~store/useStore";
 import Header from "~components/Header";
-import SearchItem from "~components/SearchItem";
+import ExperimentItem from "~components/ExperimentItem";
 
 function SearchExperiments() {
   const theme = useMantineTheme();
@@ -89,7 +89,7 @@ function SearchExperiments() {
             {experiments.length} experiments found
           </Text>
           {experiments.map((experiment) => (
-            <SearchItem key={experiment.id} experiment={experiment} />
+            <ExperimentItem key={experiment.id} experiment={experiment} />
           ))}
         </>
       )}

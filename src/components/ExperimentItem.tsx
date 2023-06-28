@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-interface SearchItemProps {
+interface ExperimentItemProps {
   experiment: {
     project_id: string;
     status: string;
@@ -33,7 +33,7 @@ interface SearchItemProps {
 
 const storage = new Storage();
 
-const SearchItem = ({ experiment }: SearchItemProps) => {
+const ExperimentItem = ({ experiment }: ExperimentItemProps) => {
   const { classes } = useStyles();
   const { localStorageKey, setLocalStorageValue, optimizelyAccessToken, setHistoryItems } = useStore(state => state);
   const [opened, setOpened] = useState(false);
@@ -64,8 +64,6 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
     };
     fetchExperiment();
   }, [opened]);
-
-  console.log(experimentData);
 
   const addHistoryItem = async (newItem: HistoryItems) => {
     const maxHistoryItems = 3;
@@ -196,4 +194,4 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
   );
 };
 
-export default SearchItem;
+export default ExperimentItem;

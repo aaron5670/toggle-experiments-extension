@@ -15,7 +15,6 @@ const Header = ({ title, description = "" }: HeaderProps) => {
       <Group position="apart">
         <Text
           variant="gradient"
-          gradient={{ from: "indigo", to: "cyan", deg: 45 }}
           sx={{ fontFamily: "Greycliff CF, sans-serif" }}
           ta="center"
           fz="xl"

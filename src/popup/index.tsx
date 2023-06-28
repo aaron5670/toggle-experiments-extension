@@ -7,7 +7,7 @@ import SearchExperiments from "~screens/SearchExperiments";
 import SearchFeatures from "~screens/SearchFeatures";
 import ConnectOptimizely from "~screens/ConnectOptimizely";
 import LatestRelease from "~screens/LatestRelease";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, MantineThemeOverride } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import getInitialLocalStorageData from "~utils/getInitialLocalStorageData";
 import versionUpdateChecker from "~utils/versionUpdateChecker";
@@ -34,7 +34,7 @@ function IndexPopup() {
         optimizelyProjectId,
         optimizelyAccessToken,
         value,
-        defaultScreen,
+        defaultScreen
       } = await getInitialLocalStorageData();
 
       setLocalStorageKey(key ?? "optimizelyNonLoggedInUser");
@@ -56,9 +56,21 @@ function IndexPopup() {
     setInitialData();
   }, []);
 
+  const redTheme: MantineThemeOverride = {
+    defaultGradient: { from: "red", to: "orange", deg: 45 },
+    colorScheme: "light",
+    primaryColor: "red"
+  };
+
+  const blueTheme: MantineThemeOverride = {
+    defaultGradient: { from: "blue", to: "cyan", deg: 45 },
+    colorScheme: "light",
+    primaryColor: "blue"
+  };
+
   return (
-    <MantineProvider withNormalizeCSS withGlobalStyles>
-      <Notifications position="top-center" style={{cursor: "pointer"}} />
+    <MantineProvider withNormalizeCSS withGlobalStyles theme={screen === "search-features" ? redTheme : blueTheme}>
+      <Notifications position="top-center" style={{ cursor: "pointer" }} />
       <div style={{ width: 375 }}>
         {screen === "home" && <HomeScreen />}
         {screen === "history" && <History />}
