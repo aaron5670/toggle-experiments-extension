@@ -67,6 +67,7 @@ function IndexPopup() {
     defaultGradient: { deg: 45, from: "blue", to: "cyan" },
     primaryColor: "blue"
   };
+  console.log(screen);
 
   return (
     <MantineProvider theme={screen === "search-features" ? redTheme : blueTheme} withGlobalStyles withNormalizeCSS>
@@ -77,7 +78,7 @@ function IndexPopup() {
         {screen === "settings" && <Settings />}
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error => "search" is @deprecated */}
-        {screen === "search-experiments" || screen === "search" && <SearchExperiments />}
+        {(screen === "search-experiments" || screen === "search") && <SearchExperiments />}
         {screen === "search-features" && <SearchFeatures />}
         {screen === "connect-optimizely" && <ConnectOptimizely />}
         {screen === "latest-release" && <LatestRelease />}
