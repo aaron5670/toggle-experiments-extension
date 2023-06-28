@@ -2,7 +2,7 @@
   "name": "toggle-experiment",
   "displayName": "Toggle Experiment",
   "description": "A browser extension to inject the LocalStorage of a website for Optimizely experiments.",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "author": "Aaron van den Berg",
   "homepage": "https://aaronvandenberg.nl/",
   "scripts": {
