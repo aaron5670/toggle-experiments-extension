@@ -1,4 +1,4 @@
-export type Screen = 'home' | 'history' | 'settings' | 'search-experiments' | 'search-features' | 'connect-optimizely' | 'latest-release';
+export type Screen = 'search-experiments' | 'connect-optimizely' | 'search-features' | 'latest-release' | 'settings' | 'history' | 'home';
 export interface HistoryItems {
   name: string,
   key: string,

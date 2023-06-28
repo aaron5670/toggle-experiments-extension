@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
 import {
-  Anchor,
-  Avatar,
-  Box,
-  Collapse,
   createStyles,
+  ThemeIcon,
+  Collapse,
   Divider,
-  Group,
   Loader,
+  Avatar,
+  Anchor,
+  Group,
   Text,
-  ThemeIcon
+  Box
 } from "@mantine/core";
 import {
   IconExternalLink,
   IconToggleRight, IconCircleCheck, IconCircleX
 } from "@tabler/icons-react";
+import React, { useEffect, useState } from "react";
 import useStore from "~store/useStore";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    cursor: "pointer",
     ":hover": {
-      transition: "background-color 150ms ease",
-      backgroundColor: "#f0f0f0"
-    }
+      backgroundColor: "#f0f0f0",
+      transition: "background-color 150ms ease"
+    },
+    cursor: "pointer"
   },
   name: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`
@@ -32,11 +32,11 @@ const useStyles = createStyles((theme) => ({
 
 interface FeatureItemProps {
   feature: {
+    description: string;
     project_id: string;
     status: string;
-    id: string;
     name: string;
-    description: string;
+    id: string;
   };
 }
 
@@ -45,7 +45,7 @@ const FeatureItem = ({ feature }: FeatureItemProps) => {
   const { optimizelyAccessToken } = useStore(state => state);
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<string | null>(null);
   const [featureData, setFeatureData] = useState(null);
 
   useEffect(() => {
@@ -54,10 +54,10 @@ const FeatureItem = ({ feature }: FeatureItemProps) => {
         try {
           setLoading(true);
           const response = await fetch(`https://api.optimizely.com/v2/features/${feature.id}`, {
-            method: "GET",
             headers: {
               Authorization: `Bearer ${optimizelyAccessToken}`
-            }
+            },
+            method: "GET"
           });
           const data = await response.json();
           setFeatureData(data);
@@ -74,9 +74,9 @@ const FeatureItem = ({ feature }: FeatureItemProps) => {
 
   return (
     <>
-      <Group className={classes.card} py="sm" onClick={() => setOpened(true)} noWrap>
-        <Avatar size={40} color="green">{<IconToggleRight size={20} stroke={1.5} />}</Avatar>
-        <Text size="sm" weight={500} className={classes.name}>
+      <Group onClick={() => setOpened(true)} className={classes.card} py="sm" noWrap>
+        <Avatar color="green" size={40}>{<IconToggleRight stroke={1.5} size={20} />}</Avatar>
+        <Text className={classes.name} weight={500} size="sm">
           {feature.name}
         </Text>
       </Group>
@@ -85,7 +85,7 @@ const FeatureItem = ({ feature }: FeatureItemProps) => {
           <Box mb="md">
             <Group position="apart" my="xs">
               <Group position="left">
-                <Text size="xs" color="dimmed">
+                <Text color="dimmed" size="xs">
                   {feature?.description}
                 </Text>
               </Group>
@@ -93,18 +93,18 @@ const FeatureItem = ({ feature }: FeatureItemProps) => {
                 <Anchor
                   href={`https://app.optimizely.com/v2/projects/${feature.project_id}/features/${feature.id}`}
                   target="_blank">
-                  <IconExternalLink size={18} stroke={1.5} style={{ marginBottom: -4 }} /> Optimizely
+                  <IconExternalLink style={{ marginBottom: -4 }} stroke={1.5} size={18} /> Optimizely
                 </Anchor>
               </Text>
             </Group>
             <Divider my="md" />
             <Text weight={500} mb="xs">Environments</Text>
-            {Object.keys(featureData?.environments || {}).map((environment) => {
+            {Object.keys(featureData?.environments || {}).map((environment, index) => {
               const isEnabled = featureData?.environments[environment].rollout_rules[0].percentage_included > 0 && featureData?.environments[environment].rollout_rules[0].enabled;
               return (
-                <Group position="apart">
+                <Group position="apart" key={index}>
                   <Group>
-                    <ThemeIcon color={isEnabled ? 'teal' : 'red'} size={18} radius="xl">
+                    <ThemeIcon color={isEnabled ? 'teal' : 'red'} radius="xl" size={18}>
                       {isEnabled ? <IconCircleCheck size="1rem" /> : <IconCircleX size="1rem" />}
                     </ThemeIcon>
                     <Text size="sm">{environment}</Text>
@@ -116,7 +116,7 @@ const FeatureItem = ({ feature }: FeatureItemProps) => {
           </Box>
         )}
         {error && (
-          <Text size="sm" mt="md" c="red" ta="center">
+          <Text ta="center" size="sm" mt="md" c="red">
             {error}
           </Text>
         )}

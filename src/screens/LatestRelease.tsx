@@ -1,4 +1,4 @@
-import { Anchor, Card, Flex, Loader, Text } from "@mantine/core";
+import { Loader, Anchor, Text, Flex, Card } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import useStore from "~store/useStore";
@@ -19,24 +19,24 @@ function LatestRelease() {
   }, []);
 
   return (
-    <Card p="lg" radius="md">
+    <Card radius="md" p="lg">
       {latestRelease ? (
         <ReactMarkdown>
           {latestRelease}
         </ReactMarkdown>
       ) : (
         <Flex
-            mih={250}
-          justify="center"
-          align="center"
+            justify="center"
           direction="row"
+          align="center"
           wrap="wrap"
+          mih={250}
         >
           <Loader size="lg" />
         </Flex>
       )}
 
-      <Text fz="xs" mt="md" align="end">
+      <Text align="end" fz="xs" mt="md">
         <Anchor onClick={() => setScreen("home")}>
           Go back to home
         </Anchor>

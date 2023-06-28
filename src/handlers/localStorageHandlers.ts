@@ -3,10 +3,10 @@ import { deleteLocalStorageValue, getLocalStorageValue, setLocalStorageValue } f
 export const updateLocalStorageValue = async (tabId, localStorageKey, localStorageValue) => {
   await chrome.scripting.executeScript(
     {
-      target: { tabId },
-      world: "MAIN", // MAIN in order to access the window object
+      args: [localStorageKey, localStorageValue],
       func: setLocalStorageValue,
-      args: [localStorageKey, localStorageValue]
+      target: { tabId },
+      world: "MAIN" // MAIN in order to access the window object
     }
   );
 };
@@ -14,10 +14,10 @@ export const updateLocalStorageValue = async (tabId, localStorageKey, localStora
 export const removeLocalStorageValue = async (tabId, localStorageKey) => {
   await chrome.scripting.executeScript(
     {
-      target: { tabId },
-      world: "MAIN", // MAIN in order to access the window object
+      args: [localStorageKey],
       func: deleteLocalStorageValue,
-      args: [localStorageKey]
+      target: { tabId },
+      world: "MAIN" // MAIN in order to access the window object
     }
   );
 };
@@ -25,10 +25,10 @@ export const removeLocalStorageValue = async (tabId, localStorageKey) => {
 export const getCurrentLocalStorageValue = async (tabId, localStorageKey) => {
   return chrome.scripting.executeScript(
     {
-      target: { tabId },
-      world: "MAIN", // MAIN in order to access the window object
+      args: [localStorageKey],
       func: getLocalStorageValue,
-      args: [localStorageKey]
+      target: { tabId },
+      world: "MAIN" // MAIN in order to access the window object
     }
   );
 }

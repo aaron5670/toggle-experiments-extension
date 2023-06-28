@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { TextInput, ActionIcon, useMantineTheme, Card, Text, Loader, Divider, Anchor, Center } from "@mantine/core";
-import { IconSearch, IconArrowRight } from "@tabler/icons-react";
+import { useMantineTheme, ActionIcon, TextInput, Divider, Loader, Center, Anchor, Text, Card } from "@mantine/core";
+import { IconArrowRight, IconSearch } from "@tabler/icons-react";
+import React, { useEffect, useState } from "react";
 import { useDebouncedValue } from "@mantine/hooks";
-import useStore from "~store/useStore";
-import Header from "~components/Header";
 import FeatureItem from "~components/FeatureItem";
+import Header from "~components/Header";
+import useStore from "~store/useStore";
 
 function SearchFeatures() {
   const theme = useMantineTheme();
@@ -13,7 +13,7 @@ function SearchFeatures() {
   const [debounced] = useDebouncedValue(value, 300);
   const [loading, setLoading] = useState(false);
   const [features, setFeatures] = useState(null);
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const search = async () => {
@@ -21,10 +21,10 @@ function SearchFeatures() {
         if (debounced.length > 0) {
           setLoading(true);
           const response = await fetch(`https://api.optimizely.com/v2/search?project_id=${optimizelyProjectId}&per_page=100&page=1&query=${value}&type=feature`, {
-            method: "GET",
             headers: {
               Authorization: `Bearer ${optimizelyAccessToken}`
-            }
+            },
+            method: "GET"
           });
           if (response.ok) {
             const data = await response.json();
@@ -44,32 +44,32 @@ function SearchFeatures() {
   }, [debounced]);
 
   return (
-    <Card p="lg" radius="md">
+    <Card radius="md" p="lg">
       <Header title="Search Features" />
       {optimizelyAccessToken && optimizelyProjectId ? (
         <>
           <TextInput
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            icon={<IconSearch size={18} stroke={1.5} />}
-            radius="xl"
-            size="sm"
-            autoFocus
             rightSection={
               loading ? (
                 <Loader size="xs" />
               ) : (
-                <ActionIcon size={28} radius="xl" color={theme.primaryColor} variant="filled">
-                  <IconArrowRight size={16} stroke={1.5} />
+                <ActionIcon color={theme.primaryColor} variant="filled" radius="xl" size={28}>
+                  <IconArrowRight stroke={1.5} size={16} />
                 </ActionIcon>
               )
             }
+            onChange={(event) => setValue(event.target.value)}
+            icon={<IconSearch stroke={1.5} size={18} />}
             placeholder="Search features"
             rightSectionWidth={37}
+            value={value}
+            radius="xl"
+            size="sm"
+            autoFocus
           />
           {!features && (
             <>
-              <Divider mt="md" label="OR" labelPosition="center" />
+              <Divider labelPosition="center" label="OR" mt="md" />
               <Center>
                 <Anchor onClick={() => setScreen("search-experiments")} size="xs" mt="xs">
                   Search for experiments
@@ -89,7 +89,7 @@ function SearchFeatures() {
             {features.length} features found
           </Text>
           {features.map((feature) => (
-            <FeatureItem key={feature.id} feature={feature} />
+            <FeatureItem feature={feature} key={feature.id} />
           ))}
         </>
       )}
@@ -99,7 +99,7 @@ function SearchFeatures() {
         </Text>
       )}
       {error && (
-        <Text size="sm" mt="md" c="red" ta="center">
+        <Text ta="center" size="sm" mt="md" c="red">
           {error}
         </Text>
       )}

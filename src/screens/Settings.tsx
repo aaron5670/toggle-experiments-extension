@@ -1,9 +1,10 @@
-import { Text, Anchor, Button, Card, Center, Group } from "@mantine/core";
-import Header from "~components/Header";
-import LocalStorageField from "~components/settings/LocalStorageInputField";
 import DefaultScreenSegmentField from "~components/settings/DefaultScreenSegmentField";
-import useStore from "~store/useStore";
+import LocalStorageField from "~components/settings/LocalStorageInputField";
+import { Center, Button, Anchor, Group, Text, Card } from "@mantine/core";
 import { IconDatabase } from "@tabler/icons-react";
+import Header from "~components/Header";
+import useStore from "~store/useStore";
+import React from "react";
 
 const manifestData = chrome.runtime.getManifest();
 
@@ -11,7 +12,7 @@ const Settings = () => {
   const { setScreen } = useStore(state => state);
 
   return (
-    <Card p="lg" radius="md">
+    <Card radius="md" p="lg">
       <Header title="Settings" />
       <DefaultScreenSegmentField />
       <LocalStorageField />

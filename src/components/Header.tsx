@@ -1,24 +1,25 @@
+import { IconAdjustments, IconHistory, IconSearch, IconHome } from "@tabler/icons-react";
 import { ActionIcon, Group, Text } from "@mantine/core";
-import { IconAdjustments, IconSearch, IconHome, IconHistory } from "@tabler/icons-react";
 import useStore from "~store/useStore";
+import React from "react";
 
 interface HeaderProps {
-  title: string;
   description?: string;
+  title: string;
 }
 
-const Header = ({ title, description = "" }: HeaderProps) => {
+const Header = ({ description = "", title }: HeaderProps) => {
   const { screen, setScreen } = useStore(state => state);
 
   return (
     <>
       <Group position="apart">
         <Text
-          variant="gradient"
           sx={{ fontFamily: "Greycliff CF, sans-serif" }}
+          variant="gradient"
           ta="center"
-          fz="xl"
           fw={700}
+          fz="xl"
         >
           {title}
         </Text>
@@ -49,7 +50,7 @@ const Header = ({ title, description = "" }: HeaderProps) => {
           </ActionIcon>
         </Group>
       </Group>
-      <Text size="xs" color="dimmed"  mb="xl">
+      <Text color="dimmed" size="xs"  mb="xl">
         {description}
       </Text>
     </>

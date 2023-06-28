@@ -1,40 +1,40 @@
-import { useEffect } from "react";
-import useStore from "~store/useStore";
+import getInitialLocalStorageData from "~utils/getInitialLocalStorageData";
+import { MantineThemeOverride, MantineProvider } from "@mantine/core";
+import versionUpdateChecker from "~utils/versionUpdateChecker";
+import SearchExperiments from "~screens/SearchExperiments";
+import ConnectOptimizely from "~screens/ConnectOptimizely";
+import { Notifications } from "@mantine/notifications";
+import SearchFeatures from "~screens/SearchFeatures";
+import LatestRelease from "~screens/LatestRelease";
+import React, { useEffect } from "react";
+import Settings from "~screens/Settings";
 import HomeScreen from "~screens/Home";
 import History from "~screens/History";
-import Settings from "~screens/Settings";
-import SearchExperiments from "~screens/SearchExperiments";
-import SearchFeatures from "~screens/SearchFeatures";
-import ConnectOptimizely from "~screens/ConnectOptimizely";
-import LatestRelease from "~screens/LatestRelease";
-import { MantineProvider, MantineThemeOverride } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
-import getInitialLocalStorageData from "~utils/getInitialLocalStorageData";
-import versionUpdateChecker from "~utils/versionUpdateChecker";
+import useStore from "~store/useStore";
 
 const broadcastChannel = new BroadcastChannel("broadcastChannel");
 
 function IndexPopup() {
   const {
-    setLocalStorageValue,
     screen,
+    setDefaultScreen,
+    setHistoryItems,
     setLocalStorageKey,
+    setLocalStorageValue,
     setOptimizelyAccessToken,
     setOptimizelyProjectId,
-    setScreen,
-    setDefaultScreen,
-    setHistoryItems
+    setScreen
   } = useStore(state => state);
 
   useEffect(() => {
     const setInitialData = async () => {
       const {
-        key,
+        defaultScreen,
         history,
-        optimizelyProjectId,
+        key,
         optimizelyAccessToken,
-        value,
-        defaultScreen
+        optimizelyProjectId,
+        value
       } = await getInitialLocalStorageData();
 
       setLocalStorageKey(key ?? "optimizelyNonLoggedInUser");
@@ -57,20 +57,20 @@ function IndexPopup() {
   }, []);
 
   const redTheme: MantineThemeOverride = {
-    defaultGradient: { from: "red", to: "orange", deg: 45 },
     colorScheme: "light",
+    defaultGradient: { deg: 45, from: "red", to: "orange" },
     primaryColor: "red"
   };
 
   const blueTheme: MantineThemeOverride = {
-    defaultGradient: { from: "blue", to: "cyan", deg: 45 },
     colorScheme: "light",
+    defaultGradient: { deg: 45, from: "blue", to: "cyan" },
     primaryColor: "blue"
   };
 
   return (
-    <MantineProvider withNormalizeCSS withGlobalStyles theme={screen === "search-features" ? redTheme : blueTheme}>
-      <Notifications position="top-center" style={{ cursor: "pointer" }} />
+    <MantineProvider theme={screen === "search-features" ? redTheme : blueTheme} withGlobalStyles withNormalizeCSS>
+      <Notifications style={{ cursor: "pointer" }} position="top-center" />
       <div style={{ width: 375 }}>
         {screen === "home" && <HomeScreen />}
         {screen === "history" && <History />}

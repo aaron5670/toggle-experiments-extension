@@ -1,33 +1,35 @@
-import { createStyles, Box, Text } from '@mantine/core';
-import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
 import type { HistoryItems } from '~types/types';
+
+import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
+import { createStyles, Text, Box } from '@mantine/core';
 import useStore from "~store/useStore";
+import React from "react";
 
 const useStyles = createStyles((theme) => ({
   link: {
     ...theme.fn.focusStyles(),
-    display: 'block',
-    textDecoration: 'none',
-    color: theme.black,
-    lineHeight: 1.2,
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
-    padding: theme.spacing.xs,
-    borderLeft: `1px solid ${theme.colors.gray[3]}`,
-    cursor: 'pointer',
-
     '&:hover': {
       backgroundColor: theme.colors.gray[0],
     },
+    borderLeft: `1px solid ${theme.colors.gray[3]}`,
+    color: theme.black,
+    cursor: 'pointer',
+    display: 'block',
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+    lineHeight: 1.2,
+    padding: theme.spacing.xs,
+
+    textDecoration: 'none',
   },
 
   linkActive: {
-    borderLeftColor: theme.colors[theme.primaryColor][7],
-    color: theme.colors[theme.primaryColor][7],
-
     '&, &:hover': {
       backgroundColor: theme.colors[theme.primaryColor][0],
     },
+    borderLeftColor: theme.colors[theme.primaryColor][7],
+
+    color: theme.colors[theme.primaryColor][7],
   },
 }));
 
@@ -36,7 +38,7 @@ interface HistoryItemsProps {
   active: string;
 }
 
-export function HistoryItems({ links, active }: HistoryItemsProps) {
+export function HistoryItems({ active, links }: HistoryItemsProps) {
   const { classes, cx } = useStyles();
   const { localStorageKey, setLocalStorageValue } = useStore(state => state);
 
@@ -50,10 +52,10 @@ export function HistoryItems({ links, active }: HistoryItemsProps) {
 
   const items = links.map((item) => (
     <Box<'a'>
-      component="a"
+      className={cx(classes.link, { [classes.linkActive]: active === item.key })}
       onClick={() => saveToLocalStorage(item.key)}
       key={item.key}
-      className={cx(classes.link, { [classes.linkActive]: active === item.key })}
+      component="a"
     >
       <div>
         <Text>{item.key}</Text>
