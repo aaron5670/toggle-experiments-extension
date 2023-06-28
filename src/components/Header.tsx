@@ -1,5 +1,5 @@
 import { ActionIcon, Group, Text } from "@mantine/core";
-import { IconAdjustments, IconSearch, IconX, IconHistory } from "@tabler/icons-react";
+import { IconAdjustments, IconSearch, IconHome, IconHistory } from "@tabler/icons-react";
 import useStore from "~store/useStore";
 
 interface HeaderProps {
@@ -23,19 +23,28 @@ const Header = ({ title, description = "" }: HeaderProps) => {
         >
           {title}
         </Text>
-        <Group position="right" spacing={1}>
+        <Group position="right" spacing={3}>
           <ActionIcon
-            onClick={() => setScreen(screen === "history" ? "home" : "history")}
+            variant={screen === "home" ? "gradient" : "light"}
+            onClick={() => setScreen("home")}
           >
-            {screen === "history" ? (<IconX />) : (<IconHistory />)}
+            <IconHome />
           </ActionIcon>
           <ActionIcon
-            onClick={() => setScreen(screen === "search-experiments" ? "home" : "search-experiments")}
+            variant={screen === "history" ? "gradient" : "light"}
+            onClick={() => setScreen("history")}
           >
-            {screen === "search-experiments" ? (<IconX />) : (<IconSearch />)}
+            <IconHistory />
           </ActionIcon>
           <ActionIcon
-            onClick={() => setScreen(screen === "settings" ? "home" : "settings")}
+            variant={screen === "search-experiments" || screen === "search-features" ? "gradient" : "light"}
+            onClick={() => setScreen("search-experiments")}
+          >
+            <IconSearch />
+          </ActionIcon>
+          <ActionIcon
+            variant={screen === "settings" ? "gradient" : "light"}
+            onClick={() => setScreen("settings")}
           >
             <IconAdjustments />
           </ActionIcon>

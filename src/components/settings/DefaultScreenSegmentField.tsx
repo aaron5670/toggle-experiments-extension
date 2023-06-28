@@ -15,7 +15,7 @@ const DefaultScreenSegmentField = () => {
         data={[
           { label: 'Home', value: 'home' },
           { label: 'Experiments', value: 'search-experiments' },
-          { label: 'Features', value: 'settings' },
+          { label: 'Features', value: 'search-features' },
           { label: 'History', value: 'history' },
         ]}
         onChange={setDefaultScreen}
