@@ -1,5 +1,6 @@
-import { Storage } from "@plasmohq/storage";
 import type { Screen } from "~types/types";
+
+import { Storage } from "@plasmohq/storage";
 
 const storage = new Storage();
 
@@ -12,12 +13,12 @@ const getInitialLocalStorageData = async () => {
   const history = await storage.get("history");
 
   return {
-    key,
-    value,
     defaultScreen,
+    history,
+    key,
     optimizelyAccessToken,
     optimizelyProjectId,
-    history,
+    value,
   };
 };
 

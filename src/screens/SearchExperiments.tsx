@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import { TextInput, ActionIcon, useMantineTheme, Card, Text, Loader } from "@mantine/core";
-import { IconSearch, IconArrowRight } from "@tabler/icons-react";
+import { useMantineTheme, ActionIcon, TextInput, Divider, Loader, Center, Anchor, Text, Card } from "@mantine/core";
+import { IconArrowRight, IconSearch } from "@tabler/icons-react";
+import ExperimentItem from "~components/ExperimentItem";
+import React, { useEffect, useState } from "react";
 import { useDebouncedValue } from "@mantine/hooks";
-import useStore from "~store/useStore";
 import Header from "~components/Header";
-import SearchItem from "~components/SearchItem";
+import useStore from "~store/useStore";
 
-function Search() {
+function SearchExperiments() {
   const theme = useMantineTheme();
   const { optimizelyAccessToken, optimizelyProjectId, setScreen } = useStore(state => state);
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 300);
   const [loading, setLoading] = useState(false);
   const [experiments, setExperiments] = useState(null);
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const search = async () => {
@@ -21,10 +21,10 @@ function Search() {
         if (debounced.length > 0) {
           setLoading(true);
           const response = await fetch(`https://api.optimizely.com/v2/search?project_id=${optimizelyProjectId}&per_page=100&page=1&query=${value}&type=experiment`, {
-            method: "GET",
             headers: {
               Authorization: `Bearer ${optimizelyAccessToken}`
-            }
+            },
+            method: "GET"
           });
           if (response.ok) {
             const data = await response.json();
@@ -44,30 +44,43 @@ function Search() {
   }, [debounced]);
 
   return (
-    <Card p="lg" radius="md">
+    <Card radius="md" p="lg">
       <Header title="Search Experiment" />
       {optimizelyAccessToken && optimizelyProjectId ? (
-        <TextInput
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          icon={<IconSearch size={18} stroke={1.5} />}
-          radius="xl"
-          size="sm"
-          rightSection={
-            loading ? (
+        <>
+          <TextInput
+            rightSection={
+              loading ? (
                 <Loader size="xs" />
-            ) : (
-              <ActionIcon size={28} radius="xl" color={theme.primaryColor} variant="filled">
-                <IconArrowRight size={16} stroke={1.5} />
-              </ActionIcon>
-            )
-          }
-          placeholder="Search experiments"
-          rightSectionWidth={37}
-        />
-      ) : (
+              ) : (
+                <ActionIcon color={theme.primaryColor} variant="filled" radius="xl" size={28}>
+                  <IconArrowRight stroke={1.5} size={16} />
+                </ActionIcon>
+              )
+            }
+            onChange={(event) => setValue(event.target.value)}
+            icon={<IconSearch stroke={1.5} size={18} />}
+            placeholder="Search experiments"
+            rightSectionWidth={37}
+            value={value}
+            radius="xl"
+            size="sm"
+            autoFocus
+          />
+          {!experiments && (
+            <>
+              <Divider labelPosition="center" label="OR" mt="md" />
+              <Center>
+                <Anchor onClick={() => setScreen("search-features")} size="xs" mt="xs">
+                  Search for feature toggles
+                </Anchor>
+              </Center>
+            </>
+          )}
+        </>
+        ) : (
         <Text fz="sm">
-          Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")} href="#">settings screen</a> to set it.
+          Optimizely access token not found. Please go to the <a onClick={() => setScreen("settings")}>settings screen</a> to set it.
         </Text>
       )}
       {experiments?.length > 0 && (
@@ -76,7 +89,7 @@ function Search() {
             {experiments.length} experiments found
           </Text>
           {experiments.map((experiment) => (
-            <SearchItem key={experiment.id} experiment={experiment} />
+            <ExperimentItem experiment={experiment} key={experiment.id} />
           ))}
         </>
       )}
@@ -86,7 +99,7 @@ function Search() {
         </Text>
       )}
       {error && (
-        <Text size="sm" mt="md" c="red" ta="center">
+        <Text ta="center" size="sm" mt="md" c="red">
           {error}
         </Text>
       )}
@@ -94,4 +107,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SearchExperiments;

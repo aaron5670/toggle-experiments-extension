@@ -1,14 +1,15 @@
-import { ActionIcon, Card, Grid, TextInput } from "@mantine/core";
-import { IconTrash } from "@tabler/icons-react";
 import {
   getCurrentLocalStorageValue,
   removeLocalStorageValue,
   updateLocalStorageValue
 } from "~handlers/localStorageHandlers";
-import useStore from "~store/useStore";
+import { ActionIcon, TextInput, Grid, Card } from "@mantine/core";
 import SaveButton from "~components/SaveButton";
+import { IconTrash } from "@tabler/icons-react";
 import Header from "~components/Header";
+import useStore from "~store/useStore";
 import { useEffect } from "react";
+import React from "react";
 
 function IndexPopup() {
   const { localStorageKey, localStorageValue, setLocalStorageValue } = useStore(state => state);
@@ -38,25 +39,25 @@ function IndexPopup() {
   };
 
   return (
-    <Card p="lg" radius="md">
+    <Card radius="md" p="lg">
       <Header
-        title="Toggle Optimizely"
         description={`Current LocalStorage key: ${localStorageKey}`}
+        title="Toggle Optimizely"
       />
       <form onSubmit={saveToLocalStorage}>
         <Grid>
           <Grid.Col span={10}>
             <TextInput
+              onChange={(e) => setLocalStorageValue(e.currentTarget.value)}
               placeholder="exp123-variant"
               label="LocalStorage value"
-              radius="xl"
               value={localStorageValue}
-              onChange={(e) => setLocalStorageValue(e.currentTarget.value)}
+              radius="xl"
             />
           </Grid.Col>
           <Grid.Col span={2}>
-            <ActionIcon variant="light" onClick={removeLocalStorage} style={{marginTop: 19}}>
-              <IconTrash size={20} color="red" />
+            <ActionIcon onClick={removeLocalStorage} style={{marginTop: 19}} variant="light">
+              <IconTrash color="red" size={20} />
             </ActionIcon>
           </Grid.Col>
         </Grid>

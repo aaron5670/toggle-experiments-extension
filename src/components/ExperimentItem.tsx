@@ -1,44 +1,45 @@
-import { useEffect, useState } from "react";
-import { Anchor, Avatar, Box, Button, Collapse, createStyles, Divider, Group, Loader, Text } from "@mantine/core";
-import { IconPlayerPlay, IconPlayerPause, IconPencil, IconQuestionMark, IconExternalLink } from "@tabler/icons-react";
-import useStore from "~store/useStore";
-import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
-import { Storage } from "@plasmohq/storage";
 import type { HistoryItems } from "~types/types";
+
+import { IconQuestionMark, IconExternalLink, IconPlayerPause, IconPlayerPlay, IconPencil } from "@tabler/icons-react";
+import { createStyles, Collapse, Divider, Loader, Button, Avatar, Anchor, Group, Text, Box } from "@mantine/core";
+import { updateLocalStorageValue } from "~handlers/localStorageHandlers";
+import React, { useEffect, useState } from "react";
+import { Storage } from "@plasmohq/storage";
+import useStore from "~store/useStore";
 
 const broadcastChannel = new BroadcastChannel("broadcastChannel");
 
 const useStyles = createStyles((theme) => ({
   card: {
-    cursor: "pointer",
     ":hover": {
-      transition: "background-color 150ms ease",
-      backgroundColor: "#f0f0f0"
-    }
+      backgroundColor: "#f0f0f0",
+      transition: "background-color 150ms ease"
+    },
+    cursor: "pointer"
   },
   name: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`
   }
 }));
 
-interface SearchItemProps {
+interface ExperimentItemProps {
   experiment: {
+    description: string;
     project_id: string;
     status: string;
-    id: string;
     name: string;
-    description: string;
+    id: string;
   };
 }
 
 const storage = new Storage();
 
-const SearchItem = ({ experiment }: SearchItemProps) => {
+const ExperimentItem = ({ experiment }: ExperimentItemProps) => {
   const { classes } = useStyles();
-  const { localStorageKey, setLocalStorageValue, optimizelyAccessToken, setHistoryItems } = useStore(state => state);
+  const { localStorageKey, optimizelyAccessToken, setHistoryItems, setLocalStorageValue } = useStore(state => state);
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<string | null>(null);
   const [experimentData, setExperimentData] = useState(null);
 
   useEffect(() => {
@@ -47,10 +48,10 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
         try {
           setLoading(true);
           const response = await fetch(`https://api.optimizely.com/v2/experiments/${experiment.id}`, {
-            method: "GET",
             headers: {
               Authorization: `Bearer ${optimizelyAccessToken}`
-            }
+            },
+            method: "GET"
           });
           const data = await response.json();
           setExperimentData(data);
@@ -64,8 +65,6 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
     };
     fetchExperiment();
   }, [opened]);
-
-  console.log(experimentData);
 
   const addHistoryItem = async (newItem: HistoryItems) => {
     const maxHistoryItems = 3;
@@ -89,7 +88,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
 
   const saveToLocalStorage = (value, experimentName) => {
     setLocalStorageValue(value);
-    addHistoryItem({ name: experimentName, key: value });
+    addHistoryItem({ key: value, name: experimentName });
 
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       updateLocalStorageValue(tabs[0].id, localStorageKey, value);
@@ -100,27 +99,27 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
     switch (status) {
       case "running":
         return {
-          name: "Running",
           color: "green",
-          icon: <IconPlayerPlay size={18} stroke={1.5} />
+          icon: <IconPlayerPlay stroke={1.5} size={18} />,
+          name: "Running"
         };
       case "paused":
         return {
-          name: "Paused",
           color: "yellow",
-          icon: <IconPlayerPause size={18} stroke={1.5} />
+          icon: <IconPlayerPause stroke={1.5} size={18} />,
+          name: "Paused"
         };
       case "not_started":
         return {
-          name: "Not Started",
           color: "gray",
-          icon: <IconPencil size={18} stroke={1.5} />
+          icon: <IconPencil stroke={1.5} size={18} />,
+          name: "Not Started"
         };
       default:
         return {
-          name: "Unknown",
           color: "gray",
-          icon: <IconQuestionMark size={18} stroke={1.5} />
+          icon: <IconQuestionMark stroke={1.5} size={18} />,
+          name: "Unknown"
         };
     }
   };
@@ -129,9 +128,9 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
 
   return (
     <>
-      <Group className={classes.card} py="sm" onClick={() => setOpened(true)} noWrap>
-        <Avatar size={40} color={status.color}>{status.icon}</Avatar>
-        <Text size="sm" weight={500} className={classes.name}>
+      <Group onClick={() => setOpened(true)} className={classes.card} py="sm" noWrap>
+        <Avatar color={status.color} size={40}>{status.icon}</Avatar>
+        <Text className={classes.name} weight={500} size="sm">
           {experiment.name}
         </Text>
       </Group>
@@ -143,7 +142,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
                 <Text size="xs" fw={500}>
                   Status:
                 </Text>
-                <Text size="xs" weight={500} color={status.color}>
+                <Text color={status.color} weight={500} size="xs">
                   {status.name}
                 </Text>
                 <Text size="xs">
@@ -154,11 +153,11 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
                 <Anchor
                   href={`https://app.optimizely.com/v2/projects/${experiment.project_id}/experiments/${experiment.id}`}
                   target="_blank">
-                  <IconExternalLink size={18} stroke={1.5} style={{ marginBottom: -4 }} /> Optimizely
+                  <IconExternalLink style={{ marginBottom: -4 }} stroke={1.5} size={18} /> Optimizely
                 </Anchor>
               </Text>
             </Group>
-            <Text size="xs" color="dimmed">
+            <Text color="dimmed" size="xs">
               {experiment?.description}
             </Text>
             <Divider my="md" />
@@ -166,14 +165,14 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
             <Button.Group orientation="vertical">
               {experimentData?.whitelist ? experimentData?.whitelist?.map((item) => (
                 <Button
-                  variant="default"
-                  key={item.user_id}
                   onClick={() => saveToLocalStorage(item.user_id, experiment.name)}
+                  key={item.user_id}
+                  variant="default"
                 >
                   {item.user_id}
                 </Button>
               )) : (
-                <Text size="xs" color="dimmed">
+                <Text color="dimmed" size="xs">
                   No whitelisted users found. {" "}
                   <Anchor
                     href={`https://app.optimizely.com/v2/projects/${experiment.project_id}/experiments/${experiment.id}/whitelist`}
@@ -187,7 +186,7 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
           </Box>
         )}
         {error && (
-          <Text size="sm" mt="md" c="red" ta="center">
+          <Text ta="center" size="sm" mt="md" c="red">
             {error}
           </Text>
         )}
@@ -196,4 +195,4 @@ const SearchItem = ({ experiment }: SearchItemProps) => {
   );
 };
 
-export default SearchItem;
+export default ExperimentItem;

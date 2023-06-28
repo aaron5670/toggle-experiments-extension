@@ -1,40 +1,44 @@
+import { Storage } from "@plasmohq/storage"
 import create from 'zustand';
 import produce from 'immer';
-import { Storage } from "@plasmohq/storage"
-import type { Screen, HistoryItems } from '~/types/types';
+
+import type { HistoryItems, Screen } from '~/types/types';
 
 interface FieldState {
-  screen: Screen;
-  setScreen: (screen: Screen) => void;
-  localStorageKey: string;
-  setLocalStorageKey: (localStorageKey: string) => void;
-  localStorageValue: string;
-  setLocalStorageValue: (value: string) => void;
   setOptimizelyProjectId: (optimizelyProjectId: string) => void;
-  optimizelyProjectId?: string;
-  defaultScreen: Screen;
-  setDefaultScreen: (screen: Screen) => void;
-  optimizelyAccessToken: string;
-  setOptimizelyAccessToken: (token: string) => void;
-  historyItems: Array<HistoryItems>;
   setHistoryItems: (historyItems: Array<HistoryItems>) => void;
+  setLocalStorageKey: (localStorageKey: string) => void;
+  setOptimizelyAccessToken: (token: string) => void;
+  setLocalStorageValue: (value: string) => void;
+  setDefaultScreen: (screen: Screen) => void;
+  setScreen: (screen: Screen) => void;
+  historyItems: Array<HistoryItems>;
+  optimizelyAccessToken: string;
+  optimizelyProjectId?: string;
+  localStorageValue: string;
+  localStorageKey: string;
+  defaultScreen: Screen;
+  screen: Screen;
 }
 
 const storage = new Storage()
 
 const useStore = create<FieldState>((set) => ({
-  screen: 'home',
   defaultScreen: 'home',
+  historyItems: [],
   localStorageKey: '',
   localStorageValue: '',
   optimizelyAccessToken: '',
   optimizelyProjectId: null,
-  historyItems: [],
+  screen: 'home',
 
-  setScreen: (screen) => set(() => ({ screen })),
   setDefaultScreen: (screen) => set(produce((state) => {
     state.defaultScreen = screen;
     storage.set("defaultScreen", screen);
+  })),
+  setHistoryItems: (history) => set(produce((state) => {
+    state.historyItems = history;
+    storage.set("history", JSON.stringify(history));
   })),
   setLocalStorageKey: (localStorageKey) => set(produce((state) => {
     state.localStorageKey = localStorageKey;
@@ -52,10 +56,7 @@ const useStore = create<FieldState>((set) => ({
     state.optimizelyProjectId = projectId;
     storage.set("optimizelyProjectId", projectId);
   })),
-  setHistoryItems: (history) => set(produce((state) => {
-    state.historyItems = history;
-    storage.set("history", JSON.stringify(history));
-  })),
+  setScreen: (screen) => set(() => ({ screen })),
 }));
 
 export default useStore;
