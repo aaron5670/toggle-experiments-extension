@@ -75,7 +75,9 @@ function IndexPopup() {
         {screen === "home" && <HomeScreen />}
         {screen === "history" && <History />}
         {screen === "settings" && <Settings />}
-        {screen === "search-experiments" && <SearchExperiments />}
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-expect-error => "search" is @deprecated */}
+        {screen === "search-experiments" || screen === "search" && <SearchExperiments />}
         {screen === "search-features" && <SearchFeatures />}
         {screen === "connect-optimizely" && <ConnectOptimizely />}
         {screen === "latest-release" && <LatestRelease />}
