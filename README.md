@@ -4,7 +4,8 @@ With this extension you can toggle Optimizely experiments on and off.
 Also, you can inject custom values into the LocalStorage of the current page.
 Build with [Plasmo](https://docs.plasmo.com/).
 
-![image](./screenshot-extension.png)
+![Screenshot of the extension](https://github.com/aaron5670/toggle-experiments-extension/assets/17295145/fc9a705a-eefb-44fd-b8d9-cfffd108d2cd)
+
 
 ## Installation
 
